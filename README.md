@@ -21,6 +21,7 @@
 -   install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
 -   install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
 -   install roblox [rojo uplift plugin](https://github.com/UpliftGames/rojo/releases/download/v7.4.0-uplift.syncback.rc.14/Rojo.rbxm) (its prerelease!) in Roblox Studio
+    -   for this, go to your `AppData\Local\Roblox\Plugins` and place the rbxm inside & restart Roblox-Studio if needed
 -   add .env file with `BUILD_DIR=DIR` where DIR can just be `./`
     -   if on wsl2 inside ubuntu feel free to set a `/mnt/` path to windows and work with the windows-located rbxlx-build (wsl2 might give permission error for Roblox-Studio else on safes)
     -   a current version of the rbxlx-build is copied to `./` nevertheless!
