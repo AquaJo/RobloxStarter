@@ -1,4 +1,4 @@
-import myMath from "shared/math";
+/*import myMath from "shared/math";
 print(myMath.add(1, 2));
 
 import Person from "shared/person";
@@ -23,3 +23,4 @@ print(`Updated student ID: ${student.getStudentId()}`); // Ausgabe: Updated stud
 
 import { makeHello } from "shared/module";
 print(makeHello("main.client.ts"));
+*/
