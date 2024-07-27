@@ -5,4 +5,4 @@
 [tools]
 rojo = "UpliftGames/rojo@7.4.0-uplift.syncback.rc.14"
 # feel free to change rojo to official rojo without syncback option and use lune or sth. for "syncback"
-remodel = "rojo-rbx/remodel@0.11.0"
+# remodel = "rojo-rbx/remodel@0.11.0"

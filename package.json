@@ -8,7 +8,9 @@
 		"tswatch": "rbxtsc -w",
 		"rbuild": "node ./scripts/rbuild.js",
 		"rserve": "rojo serve",
-		"rsb": "node ./scripts/rsb.js",
+		"rssb": "node ./scripts/rsb.js",
+		"rsync": "rsync -av --delete --include='*/' --include='*.rbxm' --exclude='*' ./out/ ./src/",
+		"rsb": "npm run rssb && npm run rsync",
 		"rkill": "pkill rojo"
 	},
 	"keywords": [],
