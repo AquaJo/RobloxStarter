@@ -14,7 +14,8 @@
 ## Todo
 
 -   maybe docker build option as easy to set up build
--   maybe framework intergration like flamework
+-   maybe framework intergration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
+-   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option
 
 ## How to Setup?
 
@@ -39,6 +40,7 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
     -   if already in use, feel free to try `npm run rkill`
 -   in Roblox-Studio connect to the server via the installed uplift-rojo-plugin (Plugins-Tab)
 -   in vsc create new bash and run `npm run tswatch` to start typescript compiling
+    -   didn't includes `tskills` yet, shouldn't rly be a problem nevertheless if you keep track of terminals
 -   in vsc program in the ./src typescript-system
 -   feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` in a new bash to run a rojo syncback to your out folder and rsync to src folder
     -   a reassurance of proper working through Disconnecting and Reconnecting Rojo on an empty place via the uplift-rojo-plugin might be recommended!
