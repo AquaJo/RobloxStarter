@@ -31,6 +31,7 @@
 		"typescript": "^5.5.4"
 	},
 	"dependencies": {
+		"@rbxts/set-timeout": "^1.1.2",
 		"dotenv": "^16.4.5",
 		"fs-extra": "^11.2.0"
 	}

@@ -1,9 +1,8 @@
-print("HEYY FROM WORKSPACE");
-
 const tweenService = game.GetService("TweenService");
+const workspace = game.GetService("Workspace");
 const tweenInfo = new TweenInfo(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0);
 
-const testblock = script.Parent!.WaitForChild("block") as Part;
+const testblock = workspace.WaitForChild("main").WaitForChild("block") as Part;
 const currentPosition = testblock.Position;
 const newPosition = currentPosition.add(new Vector3(30, 0, 0)); // Add +30 in the x direction
 

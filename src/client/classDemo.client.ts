@@ -1,8 +1,8 @@
-import myMath from "shared/math";
+import myMath from "shared/TS/math";
 print(myMath.add(1, 2));
 
-import Person from "shared/person";
-import Student from "shared/student";
+import Person from "shared/TS/person";
+import Student from "shared/TS/student";
 
 // Erstellen einer Instanz der Person-Klasse
 const person = new Person("Alice", 30);
@@ -21,5 +21,5 @@ print(`Updated name: ${student.getName()}`); // Ausgabe: Updated name: Robert
 print(`Updated age: ${student.getAge()}`); // Ausgabe: Updated age: 21
 print(`Updated student ID: ${student.getStudentId()}`); // Ausgabe: Updated student ID: S54321
 
-import { makeHello } from "shared/module";
+import { makeHello } from "shared/TS/module";
 print(makeHello("main.client.ts"));
