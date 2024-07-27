@@ -5,7 +5,7 @@
 		"useJSXTextNode": true,
 		"ecmaVersion": 2018,
 		"sourceType": "module",
-		"project": "./tsconfig.json",
+		"project": "./tsconfig.json"
 	},
 	"ignorePatterns": ["/out"],
 	"plugins": ["@typescript-eslint", "roblox-ts", "prettier"],
@@ -16,19 +16,19 @@
 		"plugin:prettier/recommended"
 	],
 	"rules": {
-		"prettier/prettier": "warn",
+		"prettier/prettier": "warn"
 	},
 	"overrides": [
 		{
 			"files": ["*.js"],
 			"env": {
 				"node": true,
-				"es6": true,
+				"es6": true
 			},
 			"parser": "espree", // Use the default JavaScript parser for JS files
 			"parserOptions": {
 				"ecmaVersion": 2020,
-				"sourceType": "module",
+				"sourceType": "module"
 			},
 			"rules": {
 				"no-undef": "off",
@@ -36,8 +36,8 @@
 				"roblox-ts/no-null": "off",
 				"roblox-ts/lua-truthiness": "off",
 				"roblox-ts/no-unknown-variables": "off",
-				"roblox-ts/no-unused-vars": "off",
-			},
-		},
-	],
+				"roblox-ts/no-unused-vars": "off"
+			}
+		}
+	]
 }
