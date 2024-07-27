@@ -1,58 +1,67 @@
 {
-	"name": "roblox-ts-game",
-	"globIgnorePaths": ["**/package.json", "**/tsconfig.json"],
-	"tree": {
-		"$className": "DataModel",
-		"ServerScriptService": {
-			"$className": "ServerScriptService",
-			"TS": {
-				"$path": "out/server"
-			}
-		},
-		"ReplicatedStorage": {
-			"$className": "ReplicatedStorage",
-			"rbxts_include": {
-				"$path": "include",
-				"node_modules": {
-					"$className": "Folder",
-					"@rbxts": {
-						"$path": "node_modules/@rbxts"
-					}
-				}
-			},
-			"TS": {
-				"$path": "out/shared"
-			}
-		},
-		"StarterPlayer": {
-			"$className": "StarterPlayer",
-			"StarterPlayerScripts": {
-				"$className": "StarterPlayerScripts",
-				"TS": {
-					"$path": "out/client"
-				}
-			}
-		},
-		"Workspace": {
-			"$className": "Workspace",
-			"$properties": {
-				"FilteringEnabled": true
-			},
-			"TS": {
-				"$path": "out/workspace"
-			}
-		},
-		"HttpService": {
-			"$className": "HttpService",
-			"$properties": {
-				"HttpEnabled": true
-			}
-		},
-		"SoundService": {
-			"$className": "SoundService",
-			"$properties": {
-				"RespectFilteringEnabled": true
-			}
-		}
-	}
+  "name": "roblox-ts-game",
+  "tree": {
+    "$className": "DataModel",
+    "HttpService": {
+      "$className": "HttpService",
+      "$properties": {
+        "HttpEnabled": true
+      }
+    },
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "TS": {
+        "$path": "out/shared"
+      },
+      "rbxts_include": {
+        "node_modules": {
+          "$className": "Folder",
+          "@rbxts": {
+            "$path": "node_modules/@rbxts"
+          }
+        },
+        "$path": "include"
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "TS": {
+        "$path": "out/server"
+      }
+    },
+    "SoundService": {
+      "$className": "SoundService",
+      "$properties": {
+        "RespectFilteringEnabled": true
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "TS": {
+          "$path": "out/client"
+        }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "TS": {
+        "$path": "out/workspace"
+      },
+      "$properties": {
+        "FilteringEnabled": true,
+        "WorldPivotData": {
+          "OptionalCFrame": null
+        }
+      },
+      "$attributes": {
+        "Rojo_Target_CurrentCamera": "540c30a44e415f0906b5ecab00000338"
+      }
+    }
+  },
+  "globIgnorePaths": [
+    "**/package.json",
+    "**/tsconfig.json"
+  ]
 }

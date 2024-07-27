@@ -1,5 +1,7 @@
-/.env
+.env
+build.rbxlx
 /node_modules
 /out
 /include
 *.tsbuildinfo
+build.rbxlx
