@@ -38,8 +38,9 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 -   in vsc run `rojo serve` or `npm run rserve` to start uplift-rojo-server
     -   if already in use, feel free to try `npm run rkill`
 -   in Roblox-Studio connect to the server via the installed uplift-rojo-plugin (Plugins-Tab)
--   in vsc run `npm run tswatch` to start typescript compiling
+-   in vsc create new bash and run `npm run tswatch` to start typescript compiling
 -   in vsc program in the ./src typescript-system
--   feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` to run an rojo syncback to your out folder and rsync to src folder
+-   feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` in a new bash to run a rojo syncback to your out folder and rsync to src folder
     -   a reassurance of proper working through Disconnecting and Reconnecting Rojo on an empty place via the uplift-rojo-plugin might be recommended!
-    -   DONT END SESSIONS UNWISELY WHEN WORKING FULLY-MANAGED-ROJO
+    -   also be aware of some objects like mesh not updating directly, ... on a new build and open it should load
+    -   DONT END SESSIONS UNWISELY WHEN WORKING FULLY-MANAGED-ROJO & DONT HAVE NAME DUPLICATES NO MATTER IF UPPERCASE- OR LOWERCASE-LETTER-MATCH
