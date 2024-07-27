@@ -3,11 +3,12 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"build": "npm run tsbuild && npm run rbuild",
 		"tsbuild": "rbxtsc",
 		"tswatch": "rbxtsc -w",
-		"rbuild": "node ./rbuild.js",
+		"rbuild": "node ./scripts/rbuild.js",
 		"rserve": "rojo serve",
-		"rsb": "node ./upliftRojoSyncback.js",
+		"rsb": "node ./scripts/rsb.js",
 		"rkill": "pkill rojo"
 	},
 	"keywords": [],
@@ -28,6 +29,7 @@
 		"typescript": "^5.5.4"
 	},
 	"dependencies": {
-		"dotenv": "^16.4.5"
+		"dotenv": "^16.4.5",
+		"fs-extra": "^11.2.0"
 	}
 }

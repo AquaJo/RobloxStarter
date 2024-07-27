@@ -12,6 +12,6 @@ buildSet.runRojoBuild((err) => {
 	if (err) {
 		console.error(`Build failed: ${err.message}`);
 	} else {
-		console.log("Build succeeded");
+		//console.log("Build succeeded");
 	}
 });

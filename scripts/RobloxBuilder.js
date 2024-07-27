@@ -2,6 +2,7 @@ require("dotenv").config();
 const { spawn, exec } = require("child_process");
 const path = require("path");
 const readline = require("readline");
+const fs = require("fs-extra"); // fs-extra importieren
 
 class RobloxBuilder {
 	constructor(buildDir) {
@@ -13,24 +14,15 @@ class RobloxBuilder {
 
 	// Copies the source file to the destination file
 	copyFile(callback) {
-		const cpProcess = spawn("cp", [this.sourceFile, this.destinationFile]);
-
-		cpProcess.stdout.on("data", (data) => {
-			console.log(`Copy stdout: ${data}`);
-		});
-
-		cpProcess.stderr.on("data", (data) => {
-			console.error(`Copy stderr: ${data}`);
-		});
-
-		cpProcess.on("close", (code) => {
-			if (code !== 0) {
-				console.error(`Copy process exited with code ${code}`);
-				return callback(new Error(`Copy process exited with code ${code}`));
-			}
-			console.log("File copied successfully");
-			callback(null);
-		});
+		fs.copy(this.sourceFile, this.destinationFile)
+			.then(() => {
+				console.log("File copied successfully");
+				callback(null);
+			})
+			.catch((error) => {
+				console.error(`Copy error: ${error}`);
+				callback(error);
+			});
 	}
 
 	// Runs the Rojo syncback command
