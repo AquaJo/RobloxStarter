@@ -1,3 +1,5 @@
-*.rbxm filter=lfs diff=lfs merge=lfs -text
-*.rbxmx binary
-*.rbx binary
+# Treat all specified file types as binary and use LFS
+*.rbxl filter=lfs diff=lfs merge=lfs -text binary
+*.rbxm filter=lfs diff=lfs merge=lfs -text binary
+*.rbxlx filter=lfs diff=lfs merge=lfs -text binary
+*.rbxmx filter=lfs diff=lfs merge=lfs -text binary
