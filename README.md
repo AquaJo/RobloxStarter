@@ -1,4 +1,4 @@
-# Boilerplate for a Roblox-Studio Project configured for WSL2
+# Boilerplate for a Roblox-Studio Project configured for WSL2 - USED FOR A CAMERA-PROJECT
 
 ## Features
 
