@@ -13,6 +13,7 @@
 
 ## Todo
 
+-   include [git-LFS](https://github.com/git-lfs/git-lfs)
 -   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option
 -   maybe automate scripts better to make development easier - like closing Roblox Studio before saving ID-lost meshes or sth. --> maybe fixable with tarmac??
 -   maybe docker build option as easy to set up build
@@ -20,6 +21,7 @@
 
 ## How to Setup?
 
+-   install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
 -   install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
 -   install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
 -   install roblox [rojo uplift plugin](https://github.com/UpliftGames/rojo/releases/download/v7.4.0-uplift.syncback.rc.14/Rojo.rbxm) (its prerelease!) in Roblox Studio
@@ -45,6 +47,6 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 -   in vsc program in the ./src typescript-system
 -   feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` in a new bash to run a rojo syncback to your out folder and rsync to src folder
     -   a reassurance of proper working through Disconnecting and Reconnecting Rojo on an empty place via the uplift-rojo-plugin might be recommended!
-        -   BUT THEN OBJECTS LIKE MESHES MIGHT LOOSE ID IF YOU DO A SYNCBACK AFTER RECONNECTING!! --> YOU MIGHT SHOULD DO A BUILD BEFORE RECONNECTING AND OPEN THAT FRESHLY IN ROBLOX STUDIO!
+        -   BUT THEN OBJECTS LIKE MESHES MIGHT LOOSE ID IF YOU DO A SYNCBACK AFTER RECONNECTING (/changes in studio)!! --> YOU MIGHT SHOULD DO A BUILD BEFORE RECONNECTING AND OPEN THAT FRESHLY IN ROBLOX STUDIO!
     -   also be aware of some objects like mesh not updating directly, ... on a new build and open it should load
     -   DONT END SESSIONS UNWISELY WHEN WORKING FULLY-MANAGED-ROJO & DONT HAVE NAME DUPLICATES NO MATTER IF UPPERCASE- OR LOWERCASE-LETTER-MATCH
