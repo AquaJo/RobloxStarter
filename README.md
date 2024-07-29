@@ -3,7 +3,7 @@
 ## Features
 
 -   "linux first" - stack (rsync used in syncback not ported to windows yet, ...), feel free using wsl2 ^^
--   uses git-lfs on default for future-proofing
+-   uses git-lfs by default for future-proofing
 -   Rojo - Filesyncing from vsc to Roblox Studio
 -   Rojo syncback from Uplift Games as Two-Way-Sync Option (Experimental!)
 -   variety of npm scripts
