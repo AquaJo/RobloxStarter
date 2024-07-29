@@ -14,7 +14,10 @@
 
 ## Todo
 
+-   **_*in general:*_** solve build 'complexity'
+
 -   make rsync include more roblox specific filetypes
+-   include selene for console ig
 -   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option
 -   maybe automate scripts better to make development easier - like closing Roblox Studio before saving ID-lost meshes or sth. --> maybe fixable with tarmac??
 -   maybe docker build option as easy to set up build
