@@ -4,6 +4,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "npm run tsbuild && npm run rbuild",
+		"start": "node scripts/start.js",
+		"stop": "node scripts/stop.js",
 		"tsbuild": "rbxtsc",
 		"tswatch": "rbxtsc -w",
 		"rbuild": "node ./scripts/rbuild.js",
