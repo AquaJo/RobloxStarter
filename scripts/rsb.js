@@ -1,5 +1,7 @@
+// "rojo syncback" (powered by uplift games)
+
 require("dotenv").config();
-const RobloxBuilder = require("./RobloxBuilder");
+const RobloxBuilder = require("./classes/RobloxBuilder");
 
 // Verzeichnispfad aus Umgebungsvariablen
 const buildDir = process.env.BUILD_DIR;

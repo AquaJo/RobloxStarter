@@ -3,20 +3,23 @@ const { spawn, exec } = require("child_process");
 const path = require("path");
 const readline = require("readline");
 const fs = require("fs-extra"); // fs-extra importieren
-
+const FolderLogic = require("./FolderLogics");
 class RobloxBuilder {
 	constructor(buildDir) {
-		this.buildDir = buildDir || "./";
-		this.sourceFile = path.resolve(this.buildDir, "build.rbxlx");
-		let firstSegment = this.sourceFile.split(path.sep).find((segment) => segment.length > 0);
+		this.equalToSource = false;
+		const projectMain = path.resolve("./");
+		this.buildDir = path.normalize(path.resolve(buildDir)) || projectMain;
+		this.sourceFile = path.join(this.buildDir, "build.rbxlx");
+		this.sourceFileWin = FolderLogic.wslToWindowsInCase(this.sourceFile);
+		let firstSegment = buildDir.split(path.sep).find((segment) => segment.length > 0);
 		if (firstSegment === "mnt") {
 			this.destinationFile = path.resolve("./build_noEditWsl.rbxlx");
-		} else if (this.buildDir !== "./") {
+		} else if (this.buildDir !== projectMain) {
 			this.destinationFile = path.resolve("./build_noEdit.rbxlx");
 		} else {
-			this.destinationFile = path.resolve("./build.rbxlx");
+			this.destinationFile = this.sourceFile;
+			this.equalToSource = true;
 		}
-		this.equalToSource = path.resolve(this.sourceFile) === path.resolve(this.destinationFile);
 	}
 
 	// Copies the source file to the destination file
@@ -90,7 +93,7 @@ class RobloxBuilder {
 
 	// Runs the Rojo build command
 	runRojoBuild(callback) {
-		const buildCommand = `rojo build -o "${path.resolve(this.buildDir, "build.rbxlx")}"`;
+		const buildCommand = `rojo build -o "${this.sourceFile}"`;
 
 		exec(buildCommand, (error, stdout, stderr) => {
 			if (error) {
