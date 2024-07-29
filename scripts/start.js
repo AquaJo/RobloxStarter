@@ -1,6 +1,5 @@
 require("dotenv").config();
 const os = require("os");
-const path = require("path");
 const { execSync } = require("child_process");
 const FolderLogics = require("./classes/FolderLogics");
 const RobloxBuilder = require("./classes/RobloxBuilder");
@@ -19,7 +18,7 @@ if (!robloxFolder) {
 			.replace(/^([A-Z]):/, (_, letter) => `/mnt/${letter.toLowerCase()}`);
 	} else {
 		windowsHomeDir = os.homedir();
-		windowsHomeDir = path.normalize(windowsHomeDir).replace(/\\/g, "/").trim();
+		windowsHomeDir = FolderLogics.normalize(windowsHomeDir);
 	}
 	robloxFolder = windowsHomeDir + "/AppData/Local/Roblox";
 }

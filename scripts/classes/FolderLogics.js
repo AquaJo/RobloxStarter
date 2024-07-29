@@ -51,7 +51,7 @@ class FolderLogics {
 	static normalize(inputPath) {
 		// do a replace of \s in addition to path.normalize
 		let normalizedPath = path.normalize(inputPath);
-		normalizedPath = normalizedPath.replace(/\\/g, "/");
+		normalizedPath = normalizedPath.replace(/\\/g, "/").trim();
 		return normalizedPath;
 	}
 	static normalizeLower(inputPath) {
