@@ -3,6 +3,7 @@
 
 # To add a new tool, add an entry to this table.
 [tools]
+tarmac = "rojo-rbx/tarmac@0.7.5"
 rojo = "UpliftGames/rojo@7.4.0-uplift.syncback.rc.14"
 # feel free to change rojo to official rojo without syncback option and use lune or sth. for "syncback"
 # remodel = "rojo-rbx/remodel@0.11.0"

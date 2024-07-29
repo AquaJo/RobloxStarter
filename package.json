@@ -11,9 +11,10 @@
 		"rbuild": "node ./scripts/rbuild.js",
 		"rserve": "rojo serve",
 		"rssb": "node ./scripts/rsb.js",
-		"rsync": "rsync -av --delete --include='*/' --include='*.rbxm' --exclude='*' ./out/ ./src/",
+		"rsync": "rsync -av --delete --include='*/' --include='*.rbxl' --include='*.rbxm' --include='*.rbxlx' --include='*.rbxmx' --exclude='*' ./out/ ./src/",
 		"rsb": "npm run rssb && npm run rsync",
-		"rkill": "pkill rojo"
+		"rkill": "pkill rojo",
+		"tms": "node ./scripts/tms.js"
 	},
 	"keywords": [],
 	"author": "",
