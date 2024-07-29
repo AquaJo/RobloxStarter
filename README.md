@@ -3,10 +3,10 @@
 ## Features
 
 -   "linux first" - stack (rsync used in syncback not ported to windows yet, ...)
--   uses git-lfs by default for future-proofing
+-   Uses git-lfs by default for future-proofing
 -   Rojo - Filesyncing from vsc to Roblox Studio
 -   Rojo syncback from Uplift Games as Two-Way-Sync Option (Experimental!)
--   variety of npm scripts
+-   Variety of npm scripts
 -   Roblox-TS integration (also with Rojo Syncback with the help of rsync)
 -   Prettier, Eslint formatting & linting & git
 -   Workspace added
@@ -25,11 +25,11 @@
 
 ## How to Setup?
 
--   install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
--   install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
--   install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
--   install roblox [rojo uplift plugin](https://github.com/UpliftGames/rojo/releases/download/v7.4.0-uplift.syncback.rc.14/Rojo.rbxm) (its prerelease!) in Roblox Studio
-    -   for this, go to your `AppData\Local\Roblox\Plugins` and place the rbxm inside & restart Roblox-Studio if needed
+-   Install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
+-   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
+-   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
+-   Install roblox [rojo uplift plugin](https://github.com/UpliftGames/rojo/releases/download/v7.4.0-uplift.syncback.rc.14/Rojo.rbxm) (its prerelease!) in Roblox Studio
+    -   For this, go to your `AppData\Local\Roblox\Plugins` and place the rbxm inside & restart Roblox-Studio if needed
 
 ### Customization - dotenv
 
@@ -50,14 +50,14 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 ### Want to develop?
 
 -   Open build.rbxlx from your .env BUILD_DIR Folder (if first time, do a [build](#just-want-to-build-once))
--   in vsc run `rojo serve` or `npm run rserve` to start uplift-rojo-server
+-   In vsc run `rojo serve` or `npm run rserve` to start uplift-rojo-server
     -   if already in use, feel free to try `npm run rkill`
--   in Roblox-Studio connect to the server via the installed uplift-rojo-plugin (Plugins-Tab)
--   in vsc create new bash and run `npm run tswatch` to start typescript compiling
-    -   didn't includes `tskills` yet, shouldn't rly be a problem nevertheless if you keep track of terminals
--   in vsc program in the ./src typescript-system
--   feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` in a new bash to run a rojo syncback to your out folder and rsync to src folder
-    -   a reassurance of proper working through Disconnecting and Reconnecting Rojo on an empty place via the uplift-rojo-plugin might be recommended!
+-   In Roblox-Studio connect to the server via the installed uplift-rojo-plugin (Plugins-Tab)
+-   In vsc create new bash and run `npm run tswatch` to start typescript compiling
+    -   Didn't includes `tskills` yet, shouldn't rly be a problem nevertheless if you keep track of terminals
+-   In vsc program in the ./src typescript-system
+-   Feel free create / change / delete models inside Roblox-Studio, but do an occasional `npm run rsb` in a new bash to run a rojo syncback to your out folder and rsync to src folder
+    -   A reassurance of proper working through Disconnecting and Reconnecting Rojo on an empty place via the uplift-rojo-plugin might be recommended!
         -   BUT THEN OBJECTS LIKE MESHES MIGHT LOOSE ID IF YOU DO A SYNCBACK AFTER RECONNECTING (/changes in studio)!! --> YOU MIGHT SHOULD DO A BUILD BEFORE RECONNECTING AND OPEN THAT FRESHLY IN ROBLOX STUDIO!
-    -   also be aware of some objects like mesh not updating directly, ... on a new build and open it should load
+    -   Also be aware of some objects like mesh not updating directly, ... on a new build and open it should load
     -   DONT END SESSIONS UNWISELY WHEN WORKING FULLY-MANAGED-ROJO & DONT HAVE NAME DUPLICATES NO MATTER IF UPPERCASE- OR LOWERCASE-LETTER-MATCH
