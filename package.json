@@ -9,11 +9,11 @@
 		"tsbuild": "rbxtsc",
 		"tswatch": "rbxtsc -w",
 		"rbuild": "node ./scripts/rbuild.js",
-		"rserve": "rojo serve",
+		"rserve": "node ./scripts/rserve.js",
 		"rssb": "node ./scripts/rsb.js",
 		"rsync": "rsync -av --delete --include='*/' --include='*.rbxl' --include='*.rbxm' --include='*.rbxlx' --include='*.rbxmx' --exclude='*' ./out/ ./src/",
 		"rsb": "npm run rssb && npm run rsync",
-		"rkill": "pkill rojo",
+		"rkill": "pkill rojo && pkill -9 34873",
 		"tms": "node ./scripts/tms.js"
 	},
 	"keywords": [],
@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@rbxts/set-timeout": "^1.1.2",
 		"dotenv": "^16.4.5",
-		"fs-extra": "^11.2.0"
+		"fs-extra": "^11.2.0",
+		"http-proxy": "^1.18.1"
 	}
 }

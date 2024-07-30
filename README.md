@@ -16,9 +16,18 @@
 
 -   **_*in general:*_** solve build 'complexity'
 
+---
+
+-   reprogram rojo plugin --> See Plugin/App as useful resource ig --> e.g. App:endSession ... (if GUI not removed, ...)
+    -   probably in the sense that the GUI is blocked and auto connecting on studio start when npm start ran --> solving build complexity bc this way there is no way of ruining meshIds and other protected stuff on rojo syncback ig (only if updated locally ig, but that shouldnt happen!)
+        -   probably just need to invoke App:startSession() on roblox studio start (or shortly after) and disable GUI-interface on Plugin click
+    -   see official release, so i can edit before build if they did so ()
+-   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option --> PARTLY DONE, NOW JUST MAKE IT MORE BUILT IN AND README SUPPORT ETC)
+
+---
+
+-   include selene for console-logging (ig its for that)
 -   make rsync include more roblox specific filetypes
--   include selene for console ig
--   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option
 -   maybe automate scripts better to make development easier - like closing Roblox Studio before saving ID-lost meshes or sth. --> maybe fixable with tarmac??
 -   maybe docker build option as easy to set up build
 -   maybe framework intergration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
