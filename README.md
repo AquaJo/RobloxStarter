@@ -23,6 +23,7 @@
         -   probably just need to invoke App:startSession() on roblox studio start (or shortly after) and disable GUI-interface on Plugin click
     -   see official release, so i can edit before build if they did so ()
 -   probably include [tarmac](https://github.com/rojo-rbx/tarmac) option --> PARTLY DONE, NOW JUST MAKE IT MORE BUILT IN AND README SUPPORT ETC)
+    -   local option for tarmac
 
 ---
 
