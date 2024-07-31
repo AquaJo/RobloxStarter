@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 class FolderLogics {
 	static findNewestModifiedFolder(dirPath) {
 		try {
@@ -37,7 +38,7 @@ class FolderLogics {
 	 * @param {string} wslPath - WSL-Path (/mnt/) (in case)
 	 * @returns {string} - to windowsPath or just input if not proper wsl-path
 	 */
-	static wslToWindowsInCase(wslPath) {
+	static wslMntToWindowsInCase(wslPath) {
 		if (wslPath.startsWith("/mnt/")) {
 			return wslPath
 				.replace(/^\/mnt\/([a-z])\//i, (_, drive) => `${drive.toUpperCase()}:\\`)
@@ -46,6 +47,9 @@ class FolderLogics {
 		} else {
 			return wslPath;
 		}
+	}
+	static wslPathToWindowsPath(wslPath) {
+		return execSync(`wslpath -w ${wslPath}`).toString().trim();
 	}
 
 	static normalize(inputPath) {

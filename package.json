@@ -13,7 +13,7 @@
 		"rssb": "node ./scripts/rsb.js",
 		"rsync": "rsync -av --delete --include='*/' --include='*.rbxl' --include='*.rbxm' --include='*.rbxlx' --include='*.rbxmx' --exclude='*' ./out/ ./src/",
 		"rsb": "npm run rssb && npm run rsync",
-		"rkill": "pkill rojo && pkill -9 34873",
+		"rkill": "pkill rojo && lsof -ti:34872 | xargs kill -9",
 		"tms": "node ./scripts/tms.js"
 	},
 	"keywords": [],
@@ -35,8 +35,9 @@
 	},
 	"dependencies": {
 		"@rbxts/set-timeout": "^1.1.2",
+		"chalk": "^5.3.0",
 		"dotenv": "^16.4.5",
-		"fs-extra": "^11.2.0",
-		"http-proxy": "^1.18.1"
+		"http-proxy": "^1.18.1",
+		"tree-kill": "^1.2.2"
 	}
 }

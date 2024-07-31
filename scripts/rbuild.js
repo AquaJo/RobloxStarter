@@ -1,13 +1,14 @@
 require("dotenv").config();
+const os = require("os");
 const RobloxBuilder = require("./classes/RobloxBuilder");
 
-// Verzeichnispfad aus Umgebungsvariablen
 const buildDir = process.env.BUILD_DIR;
+if (os.platform() === "linux" && !buildDir) {
+	console.error("please set a build dir in .env pointing to a windows folder using /mnt/c/");
+}
 
-// Erstelle eine Instanz der FileOperations-Klasse
 const buildSet = new RobloxBuilder(buildDir);
 
-// Verarbeite die Dateien
 buildSet.runRojoBuild((err) => {
 	if (err) {
 		console.error(`Build failed: ${err.message}`);

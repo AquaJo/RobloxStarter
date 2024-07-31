@@ -2,15 +2,16 @@ require("dotenv").config();
 const { spawn, exec } = require("child_process");
 const path = require("path");
 const readline = require("readline");
-const fs = require("fs-extra"); // fs-extra import
+const fs = require("fs");
 const FolderLogic = require("./FolderLogics");
 class RobloxBuilder {
 	constructor(buildDir) {
 		this.equalToSource = false;
 		const projectMain = path.resolve("./");
 		this.buildDir = path.normalize(path.resolve(buildDir)) || projectMain;
+		this.buildDirWin = FolderLogic.wslMntToWindowsInCase(this.buildDir);
 		this.sourceFile = path.join(this.buildDir, "build.rbxlx");
-		this.sourceFileWin = FolderLogic.wslToWindowsInCase(this.sourceFile);
+		this.sourceFileWin = FolderLogic.wslMntToWindowsInCase(this.sourceFile);
 		let firstSegment = buildDir.split(path.sep).find((segment) => segment.length > 0);
 		if (firstSegment === "mnt") {
 			this.destinationFile = path.resolve("./build_noEditWsl.rbxlx");
@@ -24,15 +25,15 @@ class RobloxBuilder {
 
 	// Copies the source file to the destination file
 	copyFile(callback) {
-		fs.copy(this.sourceFile, this.destinationFile)
-			.then(() => {
-				console.log("File copied successfully");
-				callback(null);
-			})
-			.catch((error) => {
+		fs.copyFile(this.sourceFile, this.destinationFile, (error) => {
+			if (error) {
 				console.error(`Copy error: ${error}`);
 				callback(error);
-			});
+			} else {
+				console.log("File copied successfully");
+				callback(null);
+			}
+		});
 	}
 
 	// Runs the Rojo syncback command

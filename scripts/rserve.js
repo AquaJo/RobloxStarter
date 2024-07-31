@@ -1,14 +1,15 @@
-// does rojo serve but implements proxy server as forwarder to have more control if needed
-// set own ports using args: -- rojoPort proxyPort
 const http = require("http");
 const httpProxy = require("http-proxy");
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
+const process = require("process");
 const args = process.argv.slice(2);
 
 let rojoPort;
 let proxyPort;
-// if args[0] and args[1] are given and port numbers then use them as rojoPort and proxyPort
-if (args[0] && args[1]) {
+
+// Default ports
+if (0 && args[0] && args[1]) {
+	// not yet supported to add custom ports
 	rojoPort = args[0];
 	proxyPort = args[1];
 } else {
@@ -16,27 +17,31 @@ if (args[0] && args[1]) {
 	proxyPort = 34872;
 }
 
+let rojoProcess;
+let proxyServer;
+
 // Start Rojo server
-exec("rojo serve --port " + rojoPort, (error, stdout, stderr) => {
-	if (error) {
-		console.error(`Fehler beim Starten von Rojo: ${error}`);
-		return;
-	}
-	if (stdout) console.log(`Rojo Server Output: ${stdout}`);
-	if (stderr) console.error(`Rojo Server Error: ${stderr}`);
-});
+function startRojoServer() {
+	rojoProcess = spawn("rojo", ["serve", "--port", rojoPort], { stdio: "inherit" });
 
-// starts proxy server that forwards requests to the Rojo server
-startPortalServer(proxyPort, rojoPort);
+	rojoProcess.on("error", (error) => {
+		console.error(`Error setting up Rojo server: ${error}`);
+	});
 
-function startPortalServer(port, hostPort) {
+	rojoProcess.on("exit", (code) => {
+		console.log(`Rojo server exited with code ${code}`);
+	});
+}
+
+// Start proxy server
+function startProxyServer() {
 	const proxy = httpProxy.createProxyServer({});
 
 	const server = http.createServer((req, res) => {
 		console.log(`Intercepted request: ${req.method} ${req.url}`);
 
 		// Forward requests to the Rojo server
-		proxy.web(req, res, { target: "http://localhost:" + hostPort }, (error) => {
+		proxy.web(req, res, { target: `http://localhost:${rojoPort}` }, (error) => {
 			if (error) {
 				console.error(`Proxy error: ${error}`);
 				res.writeHead(500, { "Content-Type": "text/plain" });
@@ -49,7 +54,34 @@ function startPortalServer(port, hostPort) {
 		console.error(`Proxy server error: ${error}`);
 	});
 
-	server.listen(port, () => {
-		console.log("Proxy server listening on port " + port);
+	server.listen(proxyPort, () => {
+		console.log(`Proxy server listening on port ${proxyPort}`);
 	});
+
+	return server;
 }
+
+// Handle termination signals to clean up
+function handleExit(signal) {
+	console.log(`Received ${signal}. Closing servers...`);
+
+	if (rojoProcess) {
+		rojoProcess.kill();
+	}
+
+	if (proxyServer) {
+		proxyServer.close(() => {
+			console.log("Proxy server closed");
+		});
+	}
+
+	process.exit();
+}
+
+// Set up signal handlers
+process.on("SIGINT", () => handleExit("SIGINT"));
+process.on("SIGTERM", () => handleExit("SIGTERM"));
+process.on("SIGQUIT", () => handleExit("SIGQUIT"));
+// Start the servers
+startRojoServer();
+proxyServer = startProxyServer();
