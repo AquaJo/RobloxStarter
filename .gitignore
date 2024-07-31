@@ -7,3 +7,7 @@ build_noEdit.rbxlx
 build_noEditWsl.rbxlx
 *.tsbuildinfo
 tarmac-manifest.toml
+
+
+# temporary (or not?)
+/plugin/Rojoo.rbxm

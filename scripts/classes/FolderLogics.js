@@ -33,7 +33,7 @@ class FolderLogics {
 		}
 	}
 	/**
-	 * Wandelt einen WSL-Pfad in einen Windows-Pfad um.
+	 * turn WSL-Path into windows-path
 	 * @param {string} wslPath - WSL-Path (/mnt/) (in case)
 	 * @returns {string} - to windowsPath or just input if not proper wsl-path
 	 */

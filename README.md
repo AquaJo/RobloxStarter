@@ -18,6 +18,7 @@
 
 ---
 
+-   fsextra?
 -   reprogram rojo plugin --> See Plugin/App as useful resource ig --> e.g. App:endSession ... (if GUI not removed, ...)
     -   probably in the sense that the GUI is blocked and auto connecting on studio start when npm start ran --> solving build complexity bc this way there is no way of ruining meshIds and other protected stuff on rojo syncback ig (only if updated locally ig, but that shouldnt happen!)
         -   probably just need to invoke App:startSession() on roblox studio start (or shortly after) and disable GUI-interface on Plugin click
