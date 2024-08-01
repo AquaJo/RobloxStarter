@@ -27,6 +27,7 @@
 -   Before doing a git clone
     -   Install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
     -   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
+        -   Be sure using atleast version 19 or sth.
     -   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
 -   in developing - mode as of now : be sure to copy the plugin as "Rojoo.rbxm" in plugin folder!
 -   Be sure to include VS-Code plugins!
