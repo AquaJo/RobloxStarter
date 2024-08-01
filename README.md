@@ -20,6 +20,7 @@
 -   local option for tarmac
 -   maybe docker build option as easy to set up build
 -   maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
+-   specific kill option in case of kickout while in start?
 
 ## How to Setup?
 
