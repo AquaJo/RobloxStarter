@@ -13,8 +13,8 @@ const ConsoleInterface = require("./ConsoleInterface");
 class RobloxStudioManager {
 	constructor() {
 		this.groupParentColor = "blueBright";
-		this.exiting = false;
-
+		this.exiting = false; // cleaning
+		this.ending = false; // end dialogue
 		this.robloxFolder = process.env.ROBLOX_FOLDER;
 		this.RobloxBuilder = new RobloxBuilder(process.env.BUILD_DIR);
 		this.buildFolderLinuxConform = this.RobloxBuilder.buildDir;
@@ -209,19 +209,22 @@ $process.Id
 
 		try {
 			exec(command, (error, stdout, stderr) => {
-				if (error) {
-					console.error(`Error on opening Roblox Studio with build: ${error.message}`);
-					this.beforeDoneError(); // could even happen haver done, but should cancle out nevertheless :D
-					return;
-				}
-				if (stderr) {
-					console.error(`Error on opening Roblox Studio with build: ${stderr}`);
-					this.beforeDoneError();
-					return;
+				if (!this.ending) {
+					if (error) {
+						console.error(`Error on opening Roblox Studio with build: ${error.message}`);
+						this.beforeDoneError(); // could even happen haver done, but should cancle out nevertheless :D
+						return;
+					}
+					if (stderr) {
+						console.error(`Error on opening Roblox Studio with build: ${stderr}`);
+						this.beforeDoneError();
+						return;
+					}
 				}
 			});
 		} catch (err) {
 			console.error(`Exception occurred while trying to open Roblox Studio with build: ${err.message}`);
+			this.beforeDoneError();
 		}
 	}
 
@@ -307,6 +310,7 @@ $process.Id
 		}
 	}
 	async endDialogue() {
+		this.ending = true;
 		console.log("safe prompt for stopping");
 		try {
 			execSync("npm run promptStop", { stdio: "inherit" });
