@@ -8,7 +8,7 @@ build_noEditWsl.rbxlx
 *.tsbuildinfo
 tarmac-manifest.toml
 tswatcher.log
-
+build.rbxlx.lock
 
 # temporary (or not?)
 /plugin/Rojoo.rbxm

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const os = require("os");
 const { spawn, exec } = require("child_process");
 const path = require("path");
 const readline = require("readline");
@@ -8,6 +9,7 @@ class RobloxBuilder {
 	constructor(buildDir) {
 		this.equalToSource = false;
 		const projectMain = path.resolve("./");
+		this.isWSL = os.platform() === "linux";
 		this.buildDir = typeof buildDir === "string" ? path.normalize(path.resolve(buildDir)) : projectMain;
 		this.buildDirWin = FolderLogic.wslMntToWindowsInCase(this.buildDir);
 		this.sourceFile = path.join(this.buildDir, "build.rbxlx");
@@ -22,7 +24,9 @@ class RobloxBuilder {
 			this.equalToSource = true;
 		}
 	}
-
+	isLinuxBuild() {
+		return this.isWSL && this.buildDir === this.buildDirWin;
+	}
 	// Copies the source file to the destination file
 	copyFile(callback) {
 		fs.copyFile(this.sourceFile, this.destinationFile, (error) => {

@@ -17,6 +17,10 @@ class RobloxStudioManager {
 		this.ending = false; // end dialogue
 		this.robloxFolder = process.env.ROBLOX_FOLDER;
 		this.RobloxBuilder = new RobloxBuilder(process.env.BUILD_DIR);
+		if (this.RobloxBuilder.isLinuxBuild()) {
+			console.error("Please use a mounted windows path as build path in .env!");
+			process.exit(1);
+		}
 		this.buildFolderLinuxConform = this.RobloxBuilder.buildDir;
 		this.buildPath = this.RobloxBuilder.sourceFileWin;
 		this.buildFolder = this.RobloxBuilder.buildDirWin;
@@ -43,7 +47,9 @@ class RobloxStudioManager {
 	}
 	async beforeDoneError() {
 		if (this.exiting) return;
-		await this.setupConsoleInterface();
+		if (!this.consoleInterface) {
+			await this.setupConsoleInterface();
+		}
 		this.cleanupAndExit();
 	}
 	async initialize() {

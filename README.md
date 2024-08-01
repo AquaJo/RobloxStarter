@@ -23,13 +23,15 @@
 -   specific kill option in case of kickout while in start?
 
 ## How to Setup?
-- Install [eslint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
--   Install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
--   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
--   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
--   Install roblox [rojo uplift plugin](https://github.com/UpliftGames/rojo/releases/download/v7.4.0-uplift.syncback.rc.14/Rojo.rbxm) (its prerelease!) in Roblox Studio
-    -   For this, go to your `AppData\Local\Roblox\Plugins` and place the rbxm inside & restart Roblox-Studio if needed
+
+-   Before doing a git clone
+    -   Install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
+    -   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
+    -   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
+-   in developing - mode as of now : be sure to copy the plugin as "Rojoo.rbxm" in plugin folder!
+-   Be sure to include VS-Code plugins!
+    -   Install [eslint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+    -   Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
 
 ### Customization - dotenv
 
