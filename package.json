@@ -3,8 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"build": "npm run tsbuild && npm run rbuild",
 		"start": "node ./scripts/start.js",
+		"build": "npm run tsbuild && npm run rbuild",
 		"stop": "node ./scripts/stop.js",
 		"promptStop": "node ./scripts/promptStop.js",
 		"tsbuild": "rbxtsc",
