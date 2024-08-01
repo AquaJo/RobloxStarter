@@ -8,11 +8,11 @@ class RobloxBuilder {
 	constructor(buildDir) {
 		this.equalToSource = false;
 		const projectMain = path.resolve("./");
-		this.buildDir = path.normalize(path.resolve(buildDir)) || projectMain;
+		this.buildDir = typeof buildDir === "string" ? path.normalize(path.resolve(buildDir)) : projectMain;
 		this.buildDirWin = FolderLogic.wslMntToWindowsInCase(this.buildDir);
 		this.sourceFile = path.join(this.buildDir, "build.rbxlx");
 		this.sourceFileWin = FolderLogic.wslMntToWindowsInCase(this.sourceFile);
-		let firstSegment = buildDir.split(path.sep).find((segment) => segment.length > 0);
+		let firstSegment = this.buildDir.split(path.sep).find((segment) => segment.length > 0);
 		if (firstSegment === "mnt") {
 			this.destinationFile = path.resolve("./build_noEditWsl.rbxlx");
 		} else if (this.buildDir !== projectMain) {

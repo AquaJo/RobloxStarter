@@ -26,6 +26,7 @@ class FileLogics {
 		}
 	}
 	static copyFileSync(from, to) {
+		// recursive copy
 		fs.copyFileSync(from, to);
 	}
 }

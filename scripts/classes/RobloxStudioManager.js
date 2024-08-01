@@ -61,7 +61,7 @@ class RobloxStudioManager {
 	async build() {
 		try {
 			console.group(await ConsoleInterface.getColoredText("Building", this.groupParentColor));
-			execSync("npm run build", { stdio: ["ignore", "ignore", "pipe"] });
+			execSync("npm run build", { stdio: ["ignore", "pipe", "pipe"] });
 			console.groupEnd();
 		} catch (error) {
 			console.error(error);
@@ -111,6 +111,10 @@ class RobloxStudioManager {
 			}
 		} else {
 			console.info("Placing Rojoo-Plugin into the plugins folder of Roblox Studio");
+			// check if folder exists, else create it
+			if (!fs.existsSync(this.pluginsFolder)) {
+				fs.mkdirSync(this.pluginsFolder, { recursive: true });
+			}
 			FileLogics.copyFileSync(rojooMainPath, this.rojoPluginPath);
 		}
 		console.groupEnd();

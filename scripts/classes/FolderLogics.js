@@ -64,6 +64,7 @@ class FolderLogics {
 		normalizedPath = normalizedPath.replace(/\\/g, "/");
 		return normalizedPath;
 	}
+
 }
 
 module.exports = FolderLogics;

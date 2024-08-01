@@ -23,7 +23,8 @@
 -   specific kill option in case of kickout while in start?
 
 ## How to Setup?
-
+- Install [eslint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
 -   Install [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
 -   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
 -   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
