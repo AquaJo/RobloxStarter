@@ -10,5 +10,7 @@
 		"editor.formatOnSave": true
 	},
 	"eslint.run": "onType",
-	"eslint.format.enable": true
+	"eslint.format.enable": true,
+	"cSpell.enableFiletypes": ["!javascript", "!typescript"],
+	"cSpell.words": ["flamework", "ROBLOSECURITY", "Roblox", "rojoo"]
 }

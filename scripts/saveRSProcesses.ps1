@@ -14,6 +14,17 @@ public class Win32 {
     [DllImport("user32.dll")]
     public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
     
+
+    [DllImport("user32.dll")]
+    public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+    [DllImport("kernel32.dll")]
+    public static extern uint GetCurrentThreadId();
+
+    [DllImport("user32.dll")]
+    public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+
+    
     public const int SW_RESTORE = 9;
     public const byte VK_CONTROL = 0x11;
     public const byte VK_S = 0x53;
@@ -42,7 +53,7 @@ function Save-WindowByPID {
     [Win32]::SetForegroundWindow($hwnd)
     
     # Wait a bit to ensure the window is focused
-    Start-Sleep -Milliseconds 500
+    Start-Sleep -Milliseconds 1500 # adjust if save not working! (maybe fix in the future)
     
     # Send Ctrl+S
     [Win32]::keybd_event([Win32]::VK_CONTROL, 0, 0, 0)

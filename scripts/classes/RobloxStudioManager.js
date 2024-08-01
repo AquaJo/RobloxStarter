@@ -46,7 +46,7 @@ class RobloxStudioManager {
 		process.on("SIGTERM", () => this.cleanupAndExit());
 	}
 	async beforeDoneError() {
-		if (this.exiting) return;
+		if (this.exiting) return; // prevention to log unnecessary errors
 		if (!this.consoleInterface) {
 			await this.setupConsoleInterface();
 		}

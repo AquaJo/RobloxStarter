@@ -13,6 +13,7 @@ processes.forEach((process) => {
 	try {
 		// Execute the PowerShell script synchronously
 		const output = execSync(command, { encoding: "utf8" });
+		console.log(output);
 	} catch (error) {
 		console.error(`Error executing command for PID ${pid}: ${error.message}`);
 	}
