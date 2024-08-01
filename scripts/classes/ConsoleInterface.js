@@ -26,10 +26,11 @@ class ConsoleInterface {
 				.trim()
 				.toLowerCase()
 				.replace(/\(\s*\)$/, "");
-
-			if (this.commandHandlers.has(input)) {
+			const inputArgs = input.split(" ");
+			const command = inputArgs[0];
+			if (this.commandHandlers.has(command)) {
 				// Wenn ein Handler für den Befehl existiert, rufe ihn auf
-				this.commandHandlers.get(input)();
+				this.commandHandlers.get(command)(inputArgs.splice(1));
 			} else if (input === "exit" || input === "quit" || input === "stop") {
 				this.onExit();
 			} else if (input === "clear") {
@@ -67,7 +68,12 @@ class ConsoleInterface {
 		process.stdout.write("\x1b[2K\r");
 		const chalk = await chalkPromise;
 		const prompt = chalk.magenta(">> ");
-		process.stdout.write(prompt + chalk.blueBright(this.currentLine));
+		const currentLineElements = this.currentLine.split(" ");
+		process.stdout.write(
+			prompt +
+				chalk.blueBright(currentLineElements[0]) +
+				(currentLineElements.length > 1 ? " " + chalk.yellow(...currentLineElements.splice(1)) : ""),
+		);
 	}
 	async clearScreen() {
 		// ()
@@ -101,7 +107,13 @@ class ConsoleInterface {
 
 	// Methode zum Hinzufügen eines Handlers für einen bestimmten Befehl
 	addCommandHandler(command, handler) {
-		this.commandHandlers.set(command.trim().toLowerCase(), handler);
+		if (Array.isArray(command)) {
+			for (const c of command) {
+				this.addCommandHandler(c, handler);
+			}
+		} else {
+			this.commandHandlers.set(command.trim().toLowerCase(), handler);
+		}
 	}
 
 	// Methode zum Entfernen eines Handlers für einen bestimmten Befehl
