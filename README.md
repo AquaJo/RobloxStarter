@@ -18,14 +18,6 @@
 
 ## Todo
 
--   Readme update
-
-    -   Hint: Syncback: don't do anything
-    -   Hint: Rojo syncback not the same in start terminal
-    -   Hint: limited 2-way system! ... --> code in vsc, models in RS
-
----
-
 -   Check uplift rojo mesh syncing
 -   Want to exit? (start terminal)
 -   Fix rojoo-Plugin / find solution for start recognition
@@ -78,16 +70,16 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 -   Also a terminal interface in the main process should appear, which you can interact with (only custom [cmds](#start---commands-development))
 -   Do you want to syncback changes you made to models etc. in Roblox Studio?
     -   Run `rojo syncback`
-    -   <ins>Note:</ins> this does more than the usual rojo syncback cmd! (saving automatically)
-    -   be sure to do nothing while saving is in process and always check if it saved!
-        -   if saving isn't working feel free setting the timeout in the [according ps1](scripts/saveRSProcesses.ps1) higher.
+        -   <ins>Note:</ins> this does more than the usual rojo syncback cmd! (saving automatically and using rsync)
+    -   Be sure to do nothing while saving is in process and always check if it saved!
+        -   If saving isn't working feel free setting the timeout in the [according ps1](scripts/saveRSProcesses.ps1) higher.
 -   Want to do a tarmac sync? - run `tarmac sync`
 -   Want to quit terminal while safely exiting whole development process (including Roblox Studio - Window, other opened windows, processes etc.?)
     -   Run `quit` or just do a `Ctrl+C` and follow the prompting for a save exit-run
 
 If you want to do some things more manually, see the [npm cmds](#npm---commands).
 
----
+**Be aware that this isn't a fully featured 2-way-sync experience. Be sure to only edit scripts in vsc-code and only work with models etc. in Roblox Studio.**
 
 ### Start - Commands (development)
 
