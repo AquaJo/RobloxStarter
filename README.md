@@ -21,7 +21,6 @@
 -   Check uplift rojo mesh syncing
 -   Want to exit? (start terminal)
 -   Fix rojoo-Plugin / find solution for start recognition
--   Upload git clone of Rojo(o) --> find solution for question how to include plugin
 -   Reset option (closing roblox, reopening with existing build)
 -   Rsync on build only should remove changed files in out again! / or other solution
 -   Local option for tarmac
@@ -39,10 +38,10 @@
     -   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
         -   Be sure using at least version 19 or sth.
     -   Install [aftman](https://github.com/LPGhatguy/aftman) & do an `aftman install`
--   In developing - mode as of now: be sure to copy the plugin as "Rojoo.rbxm" in plugin folder!
 -   Be sure to include VS-Code plugins!
     -   Install [eslint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     -   Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
+-   Don't want to follow [start-script-practice](#want-to-develop)? --> feel free to `npm run updateSubmodules && npm run updatePlugin`
 
 ### Customization - dotenv
 
@@ -98,6 +97,7 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 | Command                    | Description                                                                                                                |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `npm run updateSubmodules` | installs submodules if needed and updates Rojoo submodule to latest on remote                                              |
+| `npm run updatePlugin`     | builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
 | `npm run start`            | Starts developer - experience interface                                                                                    |
 | `npm run build`            | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
 | `npm run stop`             | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |

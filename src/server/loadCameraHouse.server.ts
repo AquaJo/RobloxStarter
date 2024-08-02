@@ -4,7 +4,7 @@ const assets = game.GetService("ReplicatedStorage").WaitForChild("Assets");
 const cameraHouse = assets.WaitForChild("CameraHouse") as Model;
 
 setTimeout(() => {
-	print("Haii");
+	print("hey I'm loading the camera rn");
 	cameraHouse.Parent = Workspace;
 	cameraHouse.MoveTo(new Vector3(0, 0, 0));
 }, 2); // bruh not even ms

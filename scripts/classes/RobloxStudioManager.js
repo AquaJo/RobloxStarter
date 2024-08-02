@@ -56,26 +56,46 @@ class RobloxStudioManager {
 		if (!this.consoleInterface) {
 			await this.setupConsoleInterface();
 		}
-		this.cleanupAndExit();
+		await this.cleanupAndExit();
 	}
 	async initialize() {
 		console.group(await ConsoleInterface.getColoredText("Setting up development environment", "green"));
-		await this.update();
+		await this.updateSubmodules();
+		await this.updatePlugin();
 		await this.build();
 		await this.analyzeRobloxFolders();
 		await this.checkRojooPlugin();
 		await this.startRserve();
 		await this.startTypescriptWatching(75, 40);
 		await this.openRobloxStudio();
+		ConsoleInterface.write(
+			"Done, have fun developing in Roblox Studio & feel free using dev-commands - setting up dev-console rn\n",
+			"green",
+		);
 		await this.setupConsoleInterface();
 		console.groupEnd();
 	}
 
-	async update() {
+	async updateSubmodules() {
 		console.group(await ConsoleInterface.getColoredText("Updating submodules", this.groupParentColor));
 		try {
-			let output = execSync("npm run updateSubmodules --progress", { stdio: ["pipe", "pipe", "pipe"] });
-			console.info(output.toString());
+			let output = execSync("npm run updateSubmodules --progress", { stdio: "inherit" });
+			console.info(output);
+		} catch (error) {
+			console.error(error);
+			await this.beforeDoneError();
+		}
+		console.groupEnd();
+	}
+	async updatePlugin() {
+		console.group(
+			await ConsoleInterface.getColoredText(
+				"Building plugin from up-to-date submodule Rojoo",
+				this.groupParentColor,
+			),
+		);
+		try {
+			execSync("npm run updatePlugin", { stdio: "inherit" });
 		} catch (error) {
 			console.error(error);
 			await this.beforeDoneError();
@@ -268,7 +288,6 @@ $process.Id
 	}
 
 	setupConsoleInterface() {
-		ConsoleInterface.write("Done, have fun developing in Roblox Studio & feel free using dev-commands \n", "green");
 		this.consoleInterface = new ConsoleInterface({
 			onExit: () => {
 				this.endDialogue();
@@ -354,23 +373,27 @@ $process.Id
 		console.group(await ConsoleInterface.getColoredText("Cleaning up ... and exiting", this.groupParentColor));
 
 		if (this.rojoProcess) {
-			kill(this.rojoProcess.pid);
+			await this.treeKillPid(this.rojoProcess.pid);
 			this.rojoProcess = null;
 		}
 		if (this.tscProcess) {
-			kill(this.tscProcess.pid);
+			await this.treeKillPid(this.tscProcess.pid);
 			this.tscProcess = null;
 		}
 		if (this.powershellLinux) {
 			if (this.windowPowershellPID) {
+				// kill powershell window if existant
 				try {
 					const closeCommand = `Stop-Process -Id ${this.windowPowershellPID} -Force`;
 					const windowClosePowerShell = spawn("powershell.exe", ["-Command", closeCommand]); // should close on its own
 					console.log(`Closed PowerShell window with process ID: ${this.windowPowershellPID}`);
 					this.windowPowershellPID = null;
-					windowClosePowerShell.on("close", (code) => {
-						kill(this.powershellLinux.pid);
-						this.powershellLinux = null;
+					await new Promise((resolve) => {
+						windowClosePowerShell.on("close", async (code) => {
+							await this.treeKillPid(this.powershellLinux.pid);
+							this.powershellLinux = null;
+							resolve();
+						});
 					});
 				} catch (e) {
 					console.error("Could not close PowerShell window: " + e);
@@ -385,12 +408,20 @@ $process.Id
 			fs.unlinkSync(logFilePath);
 		}
 
-		// Optionally wait for a moment to ensure processes are terminated
-		setTimeout(() => {
-			console.groupEnd();
-			this.consoleInterface.code = true;
-			process.exit();
-		}, 1500);
+		console.groupEnd();
+		this.consoleInterface.code = true;
+		process.exit();
+	}
+	async treeKillPid(pid) {
+		return new Promise((resolve, reject) => {
+			kill(pid, (error) => {
+				if (error) {
+					reject(error);
+				} else {
+					resolve();
+				}
+			});
+		});
 	}
 }
 
