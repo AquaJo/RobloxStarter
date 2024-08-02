@@ -4,6 +4,7 @@ const chalkPromise = import("chalk").then((m) => m.default);
 class ConsoleInterface {
 	constructor({ onExit = () => {}, onLine = () => {}, onData = () => {} } = {}) {
 		this.code = true;
+		this.promptType = "input";
 		this.currentLine = "";
 		this.onExit = onExit;
 		this.onLine = onLine;
@@ -19,9 +20,12 @@ class ConsoleInterface {
 		this.init();
 	}
 
-	init() {
+	async init() {
+		this.chalk = await chalkPromise;
+		this.prompt = this.chalk.magenta(">> ");
 		this.updateConsole();
 		this.rl.on("line", async (line) => {
+			if (this.promptType === "yesno") return;
 			const input = line
 				.trim()
 				.toLowerCase()
@@ -66,13 +70,11 @@ class ConsoleInterface {
 	async updateConsole() {
 		if (!this.code) return;
 		process.stdout.write("\x1b[2K\r");
-		const chalk = await chalkPromise;
-		const prompt = chalk.magenta(">> ");
 		const currentLineElements = this.currentLine.split(" ");
 		process.stdout.write(
-			prompt +
-				chalk.blueBright(currentLineElements[0]) +
-				(currentLineElements.length > 1 ? " " + chalk.yellow(...currentLineElements.splice(1)) : ""),
+			this.prompt +
+				this.chalk.blueBright(currentLineElements[0]) +
+				(currentLineElements.length > 1 ? " " + this.chalk.yellow(...currentLineElements.splice(1)) : ""),
 		);
 	}
 	async clearScreen() {
@@ -116,9 +118,38 @@ class ConsoleInterface {
 		}
 	}
 
-	// Methode zum Entfernen eines Handlers für einen bestimmten Befehl
 	removeCommandHandler(command) {
 		this.commandHandlers.delete(command.trim().toLowerCase());
+	}
+
+	async askYesNoQuestion(question) {
+		this.prompt = this.chalk.hex("#FFA500")(">>> ");
+		this.promptType = "yesno";
+		console.log(this.chalk.red(question));
+
+		let answer = await new Promise((resolve) => {
+			const self = this;
+			function _resolve(val) {
+				self.rl.removeListener("line", onLine);
+				resolve(val);
+			}
+			async function onLine(line) {
+				const input = line.trim().toLowerCase();
+				if (input === "y" || input === "yes") {
+					_resolve(true);
+				} else if (input === "n" || input === "no") {
+					_resolve(false);
+				} else {
+					console.log(self.chalk.red("Invalid input. Please enter 'y(es)' or 'n(o)'."));
+				}
+			}
+			this.rl.on("line", onLine);
+		});
+
+		this.prompt = this.chalk.magenta(">> ");
+		this.promptType = "input";
+		this.updateConsole();
+		return answer;
 	}
 
 	static async write(text, color) {

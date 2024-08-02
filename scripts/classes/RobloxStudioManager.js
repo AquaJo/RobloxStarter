@@ -1,5 +1,6 @@
 require("dotenv").config();
 const os = require("os");
+const readline = require("readline");
 const path = require("path");
 const { execSync, spawnSync, spawn, exec } = require("child_process");
 const kill = require("tree-kill");
@@ -14,6 +15,7 @@ class RobloxStudioManager {
 	constructor() {
 		this.groupParentColor = "blueBright";
 		this.exiting = false; // cleaning
+		this.resetting = false;
 		this.ending = false; // end dialogue
 		this.robloxFolder = process.env.ROBLOX_FOLDER;
 		this.RobloxBuilder = new RobloxBuilder(process.env.BUILD_DIR);
@@ -258,7 +260,7 @@ $process.Id
 
 		try {
 			exec(command, (error, stdout, stderr) => {
-				if (!this.ending) {
+				if (!this.ending && !this.resetting) {
 					if (error) {
 						console.error(`Error on opening Roblox Studio with build: ${error.message}`);
 						this.beforeDoneError(); // could even happen haver done, but should cancle out nevertheless :D
@@ -272,8 +274,10 @@ $process.Id
 				}
 			});
 		} catch (err) {
-			console.error(`Exception occurred while trying to open Roblox Studio with build: ${err.message}`);
-			this.beforeDoneError();
+			if (!this.ending && !this.resetting) {
+				console.error(`Exception occurred while trying to open Roblox Studio with build: ${err.message}`);
+				this.beforeDoneError();
+			}
 		}
 	}
 
@@ -310,10 +314,23 @@ $process.Id
 		this.consoleInterface.addCommandHandler("echo", (args) => {
 			console.log(...args);
 		});
-		this.consoleInterface.addCommandHandler("reset", (args) => {
-			try {
-				execSync("node", ["reset.js", JSON.stringify(this)], { encoding: "utf-8" });
-			} catch (e) {}
+		this.consoleInterface.addCommandHandler("reset", async (args) => {
+			if (this.resetting) return;
+			this.consoleInterface
+				.askYesNoQuestion("Are you sure you want to throw away your changes and restart (y/n)?")
+				.then(async (answer) => {
+					if (answer) {
+						process.stdout.write("\r               ");
+						this.resetting = true;
+						RobloxStudioManager.closeRoblox(true);
+						await this.build();
+						await this.openRobloxStudio();
+						this.consoleInterface.updateConsole();
+						setTimeout(() => {
+							this.resetting = false;
+						}, 10000); // then roblox should be closed (not the best solution but should work for now)
+					}
+				});
 		});
 		function tms() {
 			console.log("Syncing with Tarmac");

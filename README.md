@@ -32,6 +32,7 @@
 -   Specific kill option in case of kickout while in start?
 -   Make npm start startup / close faster / more efficient
 -   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
+-   No sec listener for roblox shutdown on reset
 
 ## How to Setup?
 
