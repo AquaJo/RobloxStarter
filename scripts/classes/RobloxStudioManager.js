@@ -310,7 +310,11 @@ $process.Id
 		this.consoleInterface.addCommandHandler("echo", (args) => {
 			console.log(...args);
 		});
-
+		this.consoleInterface.addCommandHandler("reset", (args) => {
+			try {
+				execSync("node", ["reset.js", JSON.stringify(this)], { encoding: "utf-8" });
+			} catch (e) {}
+		});
 		function tms() {
 			console.log("Syncing with Tarmac");
 			try {

@@ -30,7 +30,8 @@
 -   Maybe docker build option as easy to set up build
 -   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
 -   Specific kill option in case of kickout while in start?
--   make npm start startup / close faster / more efficient
+-   Make npm start startup / close faster / more efficient
+-   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
 
 ## How to Setup?
 

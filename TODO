@@ -1,1 +1,9 @@
-# include npm run updatePlugin in start process after git submodule handling
+check:
+
+-   submodule loading, updating, building
+    -   integration into start process
+-   adding start functionalities & improved error handling
+
+TODO
+
+-   reset

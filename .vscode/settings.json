@@ -12,5 +12,29 @@
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
 	"cSpell.enableFiletypes": ["!javascript", "!typescript"],
-	"cSpell.words": ["flamework", "ROBLOSECURITY", "Roblox", "rojoo"]
+	"cSpell.words": [
+		"aftman",
+		"appdata",
+		"cmds",
+		"flamework",
+		"kickout",
+		"nosave",
+		"rbuild",
+		"rbxlx",
+		"rbxm",
+		"rbxtsc",
+		"rkill",
+		"ROBLOSECURITY",
+		"Roblox",
+		"rojo",
+		"Rojo",
+		"rojoo",
+		"rsbn",
+		"rserve",
+		"rssb",
+		"syncback",
+		"syncbacks",
+		"tsbuild",
+		"tswatch"
+	]
 }
