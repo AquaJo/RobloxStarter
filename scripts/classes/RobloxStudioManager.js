@@ -286,6 +286,13 @@ $process.Id
 			console.error(error);
 		}
 	}
+	static rssb() {
+		try {
+			execSync("npm run rsb", { stdio: "inherit" });
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	setupConsoleInterface() {
 		this.consoleInterface = new ConsoleInterface({
@@ -329,13 +336,21 @@ $process.Id
 		this.consoleInterface.addCommandHandler(["pull", "rsb"], (args) => {
 			RobloxStudioManager.rsb();
 		});
+
+		this.consoleInterface.addCommandHandler(["rsbn", "rssb"], (args) => {
+			RobloxStudioManager.rssb();
+		});
 		this.consoleInterface.addCommandHandler("rojo", (args) => {
 			if (args.length < 1) {
 				console.log("needing second hand argument");
 				return;
 			}
 			if (args[0] === "syncback") {
-				RobloxStudioManager.rsb();
+				if (args.length < 2) {
+					RobloxStudioManager.rsb();
+				} else if (args[1] === "nosave") {
+					RobloxStudioManager.rssb();
+				}
 			} else {
 				console.log("second argument not valid");
 			}

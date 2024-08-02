@@ -2,7 +2,7 @@
 
 ## Features
 
--   "Linux first" - stack (rsync used in syncback not ported to windows yet, ...)
+-   "Linux first" - stack (rsync used in syncback & bash usage on plugin build not ported to windows yet, ...)
     -   Windows is kept in mind but isn't tested yet and guaranteed to be limited in functionality
 -   Uses git-lfs by default for future-proofing (install before copy!)
 -   Includes tarmac for the same reason
@@ -30,6 +30,7 @@
 -   Maybe docker build option as easy to set up build
 -   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
 -   Specific kill option in case of kickout while in start?
+-   make npm start startup / close faster / more efficient
 
 ## How to Setup?
 
@@ -82,13 +83,14 @@ If you want to do some things more manually, see the [npm cmds](#npm---commands)
 
 ### Start - Commands (development)
 
-| Command                          | Use Case                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------- |
-| `echo <message>`                 | repeats `<message>`                                                       |
-| `quit`, `exit`, `stop`, `Ctrl+C` | starts safe terminal-ending-process                                       |
-| `clear`                          | clears the console                                                        |
-| `tarmac sync`, `tm sync`, `tms`  | syncs tarmac assets                                                       |
-| `rojo syncback`, `rsb`, `pull`   | does an automated saving and rojo syncback on build with rsync afterwards |
+| Command                                | Use Case                                                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `echo <message>`                       | repeats `<message>`                                                                                          |
+| `quit`, `exit`, `stop`, `Ctrl+C`       | starts safe terminal-ending-process                                                                          |
+| `clear`                                | clears the console                                                                                           |
+| `tarmac sync`, `tm sync`, `tms`        | syncs tarmac assets                                                                                          |
+| `rojo syncback`, `rsb`, `pull`         | does an automated saving and rojo syncback on build with rsync afterwards                                    |
+| `rojo syncback nosave`, `rssb`, `rsbn` | only does rojo syncback followed by rsync (so not a normal rssb bc rsync is always done in start-experience) |
 
 Commands without options or messages can also be run as e.g. `quit()` instead of just `quit`
 

@@ -14,7 +14,6 @@ public class Win32 {
     [DllImport("user32.dll")]
     public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
     
-
     [DllImport("user32.dll")]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
@@ -24,8 +23,8 @@ public class Win32 {
     [DllImport("user32.dll")]
     public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
 
-    
     public const int SW_RESTORE = 9;
+    public const int SW_MINIMIZE = 6;
     public const byte VK_CONTROL = 0x11;
     public const byte VK_S = 0x53;
     public const uint KEYEVENTF_KEYUP = 0x0002;
@@ -49,8 +48,25 @@ function Save-WindowByPID {
         return
     }
     
+    # Minimize the window
+    [Win32]::ShowWindow($hwnd, [Win32]::SW_MINIMIZE)
+    
+    # Restore the window
+    Start-Sleep -Milliseconds 500
     [Win32]::ShowWindow($hwnd, [Win32]::SW_RESTORE)
+    
+   <#  # Get the thread IDs
+    $currentThreadId = [Win32]::GetCurrentThreadId()
+    [Win32]::GetWindowThreadProcessId($hwnd, [ref]$targetThreadId) | Out-Null
+    
+    # Attach input threads
+    [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $true)
+     #>
+    # Set foreground window
     [Win32]::SetForegroundWindow($hwnd)
+    
+    # Detach input threads
+    [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $false)
     
     # Wait a bit to ensure the window is focused
     Start-Sleep -Milliseconds 1500 # adjust if save not working! (maybe fix in the future)
