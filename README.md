@@ -83,14 +83,14 @@ If you want to do some things more manually, see the [npm cmds](#npm---commands)
 
 ### Start - Commands (development)
 
-| Command                                | Use Case                                                                                                     |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `echo <message>`                       | repeats `<message>`                                                                                          |
-| `quit`, `exit`, `stop`, `Ctrl+C`       | starts safe terminal-ending-process                                                                          |
-| `clear`                                | clears the console                                                                                           |
-| `tarmac sync`, `tm sync`, `tms`        | syncs tarmac assets                                                                                          |
-| `rojo syncback`, `rsb`, `pull`         | does an automated saving and rojo syncback on build with rsync afterwards                                    |
-| `rojo syncback nosave`, `rssb`, `rsbn` | only does rojo syncback followed by rsync (so not a normal rssb bc rsync is always done in start-experience) |
+| Command                                | Use Case                                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `echo <message>`                       | repeats `<message>`                                                                                           |
+| `quit`, `exit`, `stop`, `Ctrl+C`       | starts safe terminal-ending-process                                                                           |
+| `clear`                                | clears the console                                                                                            |
+| `tarmac sync`, `tm sync`, `tms`        | syncs tarmac assets                                                                                           |
+| `rojo syncback`, `rsb`, `pull`         | does an automated saving and rojo syncback on build with rsync afterwards                                     |
+| `rojo syncback nosave`, `rssb`, `rsbn` | only does `npm run rssb` followed by rsync (so not a normal rssb bc rsync is always done in start-experience) |
 
 Commands without options or messages can also be run as e.g. `quit()` instead of just `quit`
 
