@@ -95,21 +95,22 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 
 ### NPM - Commands
 
-| Command                | Description                                                                                                                |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `npm run start`        | Starts developer - experience interface                                                                                    |
-| `npm run build`        | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
-| `npm run stop`         | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
-| `npm run stop -- hard` | Does the same as as npm run stop, but closing it forcefully                                                                |
-| `npm run promptStop`   | Runs `promptStop.js` to make an prompted npm run stop with possible rojo syncback (including save and rsync)               |
-| `npm run tsbuild`      | Compiles TypeScript using `rbxtsc` available through `npm install`                                                         |
-| `npm run tswatch`      | Watches TypeScript files and compiles them on changes (to lua) into out                                                    |
-| `npm run rbuild`       | Runs `rbuild.js` to build the project (rojo build, but with .env configuration and copy to `./` etc)                       |
-| `npm run rserve`       | Starts the server using the `rserve.js` script (proxies normal `rojo serve` (maybe for future features))                   |
-| `npm run rssb`         | Runs `rsb.js`, doing a "simple, but else standard" `rojo sync back` without saving before nor rsync into `./src` folder    |
-| `npm run rsync`        | Synchronizes (`./out` to `/src`) files using `rsync` with specific include and exclude patterns (addressing roblox models) |
-| `npm run rsb`          | Runs `rssb` and `rsync` to synchronize files ("my rojo syncback (without save)")                                           |
-| `npm run save`         | Runs `save.js` to save the current state of Roblox-Studio progress **to build file**                                       |
-| `npm run saveRsb`      | Runs `save`, `rssb`, and `rsync` to save the state and synchronize files                                                   |
-| `npm run rkill`        | Terminates `rojo` processes and kills all processes on port 34872 (proxy)                                                  |
-| `npm run tms`          | Runs `tms.js` (a tarmac sync)                                                                                              |
+| Command                    | Description                                                                                                                |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `npm run updateSubmodules` | installs submodules if needed and updates Rojoo submodule to latest on remote                                              |
+| `npm run start`            | Starts developer - experience interface                                                                                    |
+| `npm run build`            | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
+| `npm run stop`             | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
+| `npm run stop -- hard`     | Does the same as as npm run stop, but closing it forcefully                                                                |
+| `npm run promptStop`       | Runs `promptStop.js` to make an prompted npm run stop with possible rojo syncback (including save and rsync)               |
+| `npm run tsbuild`          | Compiles TypeScript using `rbxtsc` available through `npm install`                                                         |
+| `npm run tswatch`          | Watches TypeScript files and compiles them on changes (to lua) into out                                                    |
+| `npm run rbuild`           | Runs `rbuild.js` to build the project (rojo build, but with .env configuration and copy to `./` etc)                       |
+| `npm run rserve`           | Starts the server using the `rserve.js` script (proxies normal `rojo serve` (maybe for future features))                   |
+| `npm run rssb`             | Runs `rsb.js`, doing a "simple, but else standard" `rojo sync back` without saving before nor rsync into `./src` folder    |
+| `npm run rsync`            | Synchronizes (`./out` to `/src`) files using `rsync` with specific include and exclude patterns (addressing roblox models) |
+| `npm run rsb`              | Runs `rssb` and `rsync` to synchronize files ("my rojo syncback (without save)")                                           |
+| `npm run save`             | Runs `save.js` to save the current state of Roblox-Studio progress **to build file**                                       |
+| `npm run saveRsb`          | Runs `save`, `rssb`, and `rsync` to save the state and synchronize files                                                   |
+| `npm run rkill`            | Terminates `rojo` processes and kills all processes on port 34872 (proxy)                                                  |
+| `npm run tms`              | Runs `tms.js` (a tarmac sync)                                                                                              |

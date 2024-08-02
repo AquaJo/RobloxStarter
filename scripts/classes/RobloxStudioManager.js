@@ -25,6 +25,12 @@ class RobloxStudioManager {
 		this.buildPath = this.RobloxBuilder.sourceFileWin;
 		this.buildFolder = this.RobloxBuilder.buildDirWin;
 		this.isWSL = os.platform() === "linux";
+		if (!this.isWSL) {
+			console.error(
+				"Currently only WSL is supported using this command (mainly because of rsync and bash - plugin-building!",
+			);
+			process.exit(1);
+		}
 		this.windowsHomeDir = null;
 		this.pluginsFolder = null;
 		this.rojoPluginPath = null;
@@ -54,6 +60,7 @@ class RobloxStudioManager {
 	}
 	async initialize() {
 		console.group(await ConsoleInterface.getColoredText("Setting up development environment", "green"));
+		await this.update();
 		await this.build();
 		await this.analyzeRobloxFolders();
 		await this.checkRojooPlugin();
@@ -64,6 +71,17 @@ class RobloxStudioManager {
 		console.groupEnd();
 	}
 
+	async update() {
+		console.group(await ConsoleInterface.getColoredText("Updating submodules", this.groupParentColor));
+		try {
+			let output = execSync("npm run updateSubmodules --progress", { stdio: ["pipe", "pipe", "pipe"] });
+			console.info(output.toString());
+		} catch (error) {
+			console.error(error);
+			await this.beforeDoneError();
+		}
+		console.groupEnd();
+	}
 	async build() {
 		try {
 			console.group(await ConsoleInterface.getColoredText("Building", this.groupParentColor));

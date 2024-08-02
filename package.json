@@ -3,6 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"updateSubmodules": "git submodule update --init --recursive && git submodule update --remote --force",
+		"updatePlugin": "bash ./Rojoo/plugin/buildInsideMain.sh",
 		"start": "node ./scripts/start.js",
 		"build": "npm run tsbuild && npm run rbuild",
 		"stop": "node ./scripts/stop.js",
