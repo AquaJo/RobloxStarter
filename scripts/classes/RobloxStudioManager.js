@@ -1,7 +1,7 @@
 require("dotenv").config();
 const os = require("os");
 const path = require("path");
-const { execSync, spawn, exec } = require("child_process");
+const { execSync, spawnSync, spawn, exec } = require("child_process");
 const kill = require("tree-kill");
 
 const fs = require("fs");
@@ -54,7 +54,7 @@ class RobloxStudioManager {
 	async beforeDoneError() {
 		if (this.exiting) return; // prevention to log unnecessary errors
 		if (!this.consoleInterface) {
-			await this.setupConsoleInterface();
+			this.setupConsoleInterface();
 		}
 		await this.cleanupAndExit();
 	}
@@ -72,15 +72,15 @@ class RobloxStudioManager {
 			"Done, have fun developing in Roblox Studio & feel free using dev-commands - setting up dev-console rn\n",
 			"green",
 		);
-		await this.setupConsoleInterface();
+		this.setupConsoleInterface();
 		console.groupEnd();
 	}
 
 	async updateSubmodules() {
 		console.group(await ConsoleInterface.getColoredText("Updating submodules", this.groupParentColor));
 		try {
-			let output = execSync("npm run updateSubmodules --progress", { stdio: "inherit" });
-			console.info(output);
+			const spawn = spawnSync("npm", ["run", "updateSubmodules"], { encoding: "utf-8" });
+			console.info(spawn.stdout);
 		} catch (error) {
 			console.error(error);
 			await this.beforeDoneError();
@@ -95,7 +95,8 @@ class RobloxStudioManager {
 			),
 		);
 		try {
-			execSync("npm run updatePlugin", { stdio: "inherit" });
+			const spawn = spawnSync("npm", ["run", "updatePlugin"], { encoding: "utf-8" });
+			console.info(spawn.stdout);
 		} catch (error) {
 			console.error(error);
 			await this.beforeDoneError();
