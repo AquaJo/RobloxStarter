@@ -1,9 +1,0 @@
-check:
-
--   submodule loading, updating, building
-    -   integration into start process
--   adding start functionalities & improved error handling
-
-TODO
-
--   reset

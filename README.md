@@ -15,6 +15,7 @@
 -   dotenv, Prettier, Eslint formatting & linting & git, ... all the advantages of using an external IDE
 -   Workspace added
 -   Simple demonstration logic
+-   Only english comments & more comments in general
 
 ## Todo
 
