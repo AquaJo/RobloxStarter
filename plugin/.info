@@ -1,2 +1,2 @@
--   edited rojo plugin to fit the needs of this workflow powerd with the help of npm run processes
--   in this folder belongs a "Rojoo.rbxm" file as the Roblox Studio plugin working. Its working as "bridge" between local rojo server and Robox Studio. It can easily be built from source using npm run commands referring to the git submodule Rojoo
+-   edited rojo plugin to fit the needs of this workflow powered with the help of npm run processes
+-   in this folder belongs a "Rojoo.rbxm" file as the Roblox Studio plugin working. Its working as "bridge" between local rojo server and Roblox Studio. It can easily be built from source using npm run commands referring to the git submodule Rojoo
