@@ -85,14 +85,15 @@ If you want to do some things more manually, see the [npm cmds](#npm---commands)
 
 ### Start - Commands (development)
 
-| Command                                | Use Case                                                                                                      |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `echo <message>`                       | repeats `<message>`                                                                                           |
-| `quit`, `exit`, `stop`, `Ctrl+C`       | starts safe terminal-ending-process                                                                           |
-| `clear`                                | clears the console                                                                                            |
-| `tarmac sync`, `tm sync`, `tms`        | syncs tarmac assets                                                                                           |
-| `rojo syncback`, `rsb`, `pull`         | does an automated saving and rojo syncback on build with rsync afterwards                                     |
-| `rojo syncback nosave`, `rssb`, `rsbn` | only does `npm run rssb` followed by rsync (so not a normal rssb bc rsync is always done in start-experience) |
+| Command                                | Use Case                                                                                                                    |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `echo <message>`                       | Repeats `<message>`                                                                                                         |
+| `quit`, `exit`, `stop`, `Ctrl+C`       | Starts safe terminal-ending-process                                                                                         |
+| `clear`                                | Clears the console                                                                                                          |
+| `tarmac sync`, `tm sync`, `tms`        | Syncs tarmac assets                                                                                                         |
+| `rojo syncback`, `rsb`, `pull`         | Does an automated saving and rojo syncback on build with rsync afterwards                                                   |
+| `rojo syncback nosave`, `rssb`, `rsbn` | Only does `npm run rssb` followed by rsync (so not a normal rssb bc rsync is always done in start-experience)               |
+| `reset`                                | Does a build from src & restarts Roblox Studio, throwing unpulled changes away (e.g. if ya mess up parts between syncbacks) |
 
 Commands without options or messages can also be run as e.g. `quit()` instead of just `quit`
 
@@ -100,8 +101,8 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 
 | Command                    | Description                                                                                                                |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `npm run updateSubmodules` | installs submodules if needed and updates Rojoo submodule to latest on remote                                              |
-| `npm run updatePlugin`     | builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
+| `npm run updateSubmodules` | Installs submodules if needed and updates Rojoo submodule to latest on remote                                              |
+| `npm run updatePlugin`     | Builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
 | `npm run start`            | Starts developer - experience interface                                                                                    |
 | `npm run build`            | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
 | `npm run stop`             | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
