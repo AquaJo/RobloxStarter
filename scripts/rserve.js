@@ -3,7 +3,7 @@ const httpProxy = require("http-proxy");
 const { spawn } = require("child_process");
 const process = require("process");
 const args = process.argv.slice(2);
-
+let first = true;
 let rojoPort;
 let proxyPort;
 
@@ -39,15 +39,27 @@ function startProxyServer() {
 
 	const server = http.createServer((req, res) => {
 		console.log(`Intercepted request: ${req.method} ${req.url}`);
-
-		// Forward requests to the Rojo server
-		proxy.web(req, res, { target: `http://localhost:${rojoPort}` }, (error) => {
-			if (error) {
-				console.error(`Proxy error: ${error}`);
-				res.writeHead(500, { "Content-Type": "text/plain" });
-				res.end("Proxy error occurred.");
+		if (req.method === "GET" && req.url === "/api/first") {
+			// Handle the specific GET /api/first request
+			console.log("Handling GET /api/first request");
+			res.writeHead(200, { "Content-Type": "application/json" });
+			if (first) {
+				res.end(JSON.stringify({ firstStart: true }));
+			} else {
+				res.end(JSON.stringify({ firstStart: false }));
 			}
-		});
+
+			first = false;
+		} else {
+			// Forward requests to the Rojo server
+			proxy.web(req, res, { target: `http://localhost:${rojoPort}` }, (error) => {
+				if (error) {
+					console.error(`Proxy error: ${error}`);
+					res.writeHead(500, { "Content-Type": "text/plain" });
+					res.end("Proxy error occurred.");
+				}
+			});
+		}
 	});
 
 	server.on("error", (error) => {
@@ -85,3 +97,11 @@ process.on("SIGQUIT", () => handleExit("SIGQUIT"));
 // Start the servers
 startRojoServer();
 proxyServer = startProxyServer();
+
+process.stdin.on("data", (data) => {
+	const message = data.toString().trim();
+	console.log(`Message from parent process: ${message}`);
+	if (message === "reset") {
+		first = true;
+	}
+});

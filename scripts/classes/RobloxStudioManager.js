@@ -12,7 +12,13 @@ const RobloxBuilder = require("./RobloxBuilder");
 const ConsoleInterface = require("./ConsoleInterface");
 
 class RobloxStudioManager {
-	constructor() {
+	constructor(args) {
+		if (args) {
+			this.args = args;
+		} else {
+			this.args = [];
+		}
+
 		this.groupParentColor = "blueBright";
 		this.exiting = false; // cleaning
 		this.resetting = false;
@@ -62,8 +68,10 @@ class RobloxStudioManager {
 	}
 	async initialize() {
 		console.group(await ConsoleInterface.getColoredText("Setting up development environment", "green"));
-		await this.updateSubmodules();
-		await this.updatePlugin();
+		if (!this.args.includes("noPluginLoading")) {
+			await this.updateSubmodules();
+			await this.updatePlugin();
+		}
 		await this.build();
 		await this.analyzeRobloxFolders();
 		await this.checkRojooPlugin();
@@ -92,7 +100,7 @@ class RobloxStudioManager {
 	async updatePlugin() {
 		console.group(
 			await ConsoleInterface.getColoredText(
-				"Building plugin from up-to-date submodule Rojoo",
+				"Building plugin from up-to-date submodule Rojoo into this projects plugin folder",
 				this.groupParentColor,
 			),
 		);
@@ -144,7 +152,12 @@ class RobloxStudioManager {
 	}
 
 	async checkRojooPlugin() {
-		console.group(await ConsoleInterface.getColoredText("Checking Rojoo-Plugin", this.groupParentColor));
+		console.group(
+			await ConsoleInterface.getColoredText(
+				"Checking Rojoo-Plugin in Roblox Studio's Plugins-Folder",
+				this.groupParentColor,
+			),
+		);
 		const rojooMainPath = path.resolve("./plugin/Rojoo.rbxm");
 		this.rojooExists = FileLogics.fileExistsSync(this.rojoPluginPath);
 		if (this.rojooExists) {
@@ -170,7 +183,7 @@ class RobloxStudioManager {
 	async startRserve() {
 		console.info(await ConsoleInterface.getColoredText("Starting proxied rojo-dev-server", this.groupParentColor));
 		this.rojoProcess = spawn("npm", ["run", "rserve"], {
-			stdio: ["ignore", "ignore", "pipe"],
+			stdio: ["pipe", "pipe", "pipe"],
 			shell: false,
 		});
 
@@ -320,6 +333,14 @@ $process.Id
 				.askYesNoQuestion("Are you sure you want to throw away your changes and restart (y/n)?")
 				.then(async (answer) => {
 					if (answer) {
+						process.stdout.write("\r");
+						try {
+							console.log("Sending reset command to rserve script");
+							this.rojoProcess.stdin.write("reset" + "\n");
+						} catch (e) {
+							console.log(e);
+							this.cleanupAndExit();
+						}
 						process.stdout.write("\r               ");
 						this.resetting = true;
 						RobloxStudioManager.closeRoblox(true);
@@ -444,7 +465,10 @@ $process.Id
 			console.log("removing log-file from " + logFilePath);
 			fs.unlinkSync(logFilePath);
 		}
-
+		if (fs.existsSync(this.rojoPluginPath)) {
+			console.log("removing plugin from Roblox Studio located in " + this.rojoPluginPath);
+			fs.unlinkSync(this.rojoPluginPath);
+		}
 		console.groupEnd();
 		this.consoleInterface.code = true;
 		process.exit();

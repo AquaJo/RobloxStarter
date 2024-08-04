@@ -90,7 +90,7 @@ If you want to do some things more manually, see the [npm cmds](#npm---commands)
 | Command                                | Use Case                                                                                                                    |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `echo <message>`                       | Repeats `<message>`                                                                                                         |
-| `quit`, `exit`, `stop`, `Ctrl+C`       | Starts safe terminal-ending-process                                                                                         |
+| `quit`, `exit`, `stop`, `Ctrl+C`       | Starts safe terminal-ending-process, on hard exits roblox will close immediately but saves some backups                     |
 | `clear`                                | Clears the console                                                                                                          |
 | `tarmac sync`, `tm sync`, `tms`        | Syncs tarmac assets                                                                                                         |
 | `rojo syncback`, `rsb`, `pull`         | Does an automated saving and rojo syncback on build with rsync afterwards                                                   |
@@ -108,7 +108,7 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 | `npm run start`            | Starts developer - experience interface                                                                                    |
 | `npm run build`            | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
 | `npm run stop`             | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
-| `npm run stop -- hard`     | Does the same as as npm run stop, but closing it forcefully                                                                |
+| `npm run stop -- hard`     | Does the same as as npm run stop, but closing it forcefully. Roblox will keep auto backups ig                              |
 | `npm run promptStop`       | Runs `promptStop.js` to make an prompted npm run stop with possible rojo syncback (including save and rsync)               |
 | `npm run tsbuild`          | Compiles TypeScript using `rbxtsc` available through `npm install`                                                         |
 | `npm run tswatch`          | Watches TypeScript files and compiles them on changes (to lua) into out                                                    |
