@@ -22,6 +22,7 @@
 	"overrides": [
 		{
 			"files": ["*.js"],
+			
 			"env": {
 				"node": true,
 				"es6": true

@@ -1,8 +1,14 @@
+/node_modules
+/out
+/include
 .env
 build.rbxlx
 build_noEdit.rbxlx
 build_noEditWsl.rbxlx
-/node_modules
-/out
-/include
 *.tsbuildinfo
+tarmac-manifest.toml
+tswatcher.log
+build.rbxlx.lock
+
+# temporary (or not?)
+/plugin/Rojoo.rbxm

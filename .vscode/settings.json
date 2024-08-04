@@ -10,5 +10,36 @@
 		"editor.formatOnSave": true
 	},
 	"eslint.run": "onType",
-	"eslint.format.enable": true
+	"eslint.format.enable": true,
+	"cSpell.enableFiletypes": ["!javascript", "!typescript"],
+	"cSpell.words": [
+		"aftman",
+		"appdata",
+		"cmds",
+		"flamework",
+		"kickout",
+		"nosave",
+		"pkill",
+		"rbuild",
+		"rbxl",
+		"rbxlx",
+		"rbxm",
+		"rbxmx",
+		"rbxts",
+		"rbxtsc",
+		"rkill",
+		"ROBLOSECURITY",
+		"Roblox",
+		"rojo",
+		"Rojo",
+		"rojoo",
+		"rsbn",
+		"rserve",
+		"rssb",
+		"syncback",
+		"syncbacks",
+		"tsbuild",
+		"tswatch",
+		"usecase"
+	]
 }

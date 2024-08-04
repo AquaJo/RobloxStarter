@@ -1,0 +1,8 @@
+name = "tarmacFileHandler"
+
+# This tells Tarmac where to find assets that we'll use in our game.
+[[inputs]]
+glob = "assets/**/*.{png,jpg}"
+codegen = true
+codegen-path = "src/assets.lua"
+codegen-base-path = "assets"

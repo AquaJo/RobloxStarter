@@ -1,15 +1,18 @@
 // "rojo syncback" (powered by uplift games)
+const os = require("os");
+if (os.platform() !== "linux") {
+	throw new Error(
+		"Rojo-Syncback by uplift with ts-mirroring only working in linux as of now due to the direct use of rsync! If you want to try a non-mirroring approach because you don't want to use typescript or whatever, feel free to run 'npm run rssb' (rojo-simple-syncback)",
+	);
+}
 
 require("dotenv").config();
 const RobloxBuilder = require("./classes/RobloxBuilder");
 
-// Verzeichnispfad aus Umgebungsvariablen
 const buildDir = process.env.BUILD_DIR;
 
-// Erstelle eine Instanz der FileOperations-Klasse
 const buildSet = new RobloxBuilder(buildDir);
 
-// Verarbeite die Dateien
 buildSet.runSmartRojoSyncback((error) => {
 	if (error) {
 		console.error(`Error during file operations: ${error.message}`);

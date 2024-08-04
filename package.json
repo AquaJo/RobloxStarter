@@ -3,17 +3,23 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"updateSubmodules": "git submodule update --init --recursive && git submodule update --remote --force",
+		"updatePlugin": "bash ./Rojoo/plugin/buildInsideMain.sh",
+		"start": "node ./scripts/start.js",
 		"build": "npm run tsbuild && npm run rbuild",
-		"start": "node scripts/start.js",
-		"stop": "node scripts/stop.js",
+		"stop": "node ./scripts/stop.js",
+		"promptStop": "node ./scripts/promptStop.js",
 		"tsbuild": "rbxtsc",
 		"tswatch": "rbxtsc -w",
 		"rbuild": "node ./scripts/rbuild.js",
-		"rserve": "rojo serve",
+		"rserve": "node ./scripts/rserve.js",
 		"rssb": "node ./scripts/rsb.js",
-		"rsync": "rsync -av --delete --include='*/' --include='*.rbxm' --exclude='*' ./out/ ./src/",
+		"rsync": "rsync -av --delete --include='*/' --include='*.rbxl' --include='*.rbxm' --include='*.rbxlx' --include='*.rbxmx' --exclude='*' ./out/ ./src/",
 		"rsb": "npm run rssb && npm run rsync",
-		"rkill": "pkill rojo"
+		"save": "node ./scripts/save.js",
+		"saveRsb": " npm run save && npm run rssb && npm run rsync",
+		"rkill": "pkill rojo && lsof -ti:34872 | xargs kill -9",
+		"tms": "node ./scripts/tms.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -34,7 +40,10 @@
 	},
 	"dependencies": {
 		"@rbxts/set-timeout": "^1.1.2",
+		"@types/node": "^22.1.0",
+		"chalk": "^5.3.0",
 		"dotenv": "^16.4.5",
-		"fs-extra": "^11.2.0"
+		"http-proxy": "^1.18.1",
+		"tree-kill": "^1.2.2"
 	}
 }

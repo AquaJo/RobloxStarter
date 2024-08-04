@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 class FolderLogics {
 	static findNewestModifiedFolder(dirPath) {
 		try {
@@ -33,11 +34,11 @@ class FolderLogics {
 		}
 	}
 	/**
-	 * Wandelt einen WSL-Pfad in einen Windows-Pfad um.
+	 * turn WSL-Path into windows-path
 	 * @param {string} wslPath - WSL-Path (/mnt/) (in case)
 	 * @returns {string} - to windowsPath or just input if not proper wsl-path
 	 */
-	static wslToWindowsInCase(wslPath) {
+	static wslMntToWindowsInCase(wslPath) {
 		if (wslPath.startsWith("/mnt/")) {
 			return wslPath
 				.replace(/^\/mnt\/([a-z])\//i, (_, drive) => `${drive.toUpperCase()}:\\`)
@@ -47,11 +48,14 @@ class FolderLogics {
 			return wslPath;
 		}
 	}
+	static wslPathToWindowsPath(wslPath) {
+		return execSync(`wslpath -w ${wslPath}`).toString().trim();
+	}
 
 	static normalize(inputPath) {
 		// do a replace of \s in addition to path.normalize
 		let normalizedPath = path.normalize(inputPath);
-		normalizedPath = normalizedPath.replace(/\\/g, "/");
+		normalizedPath = normalizedPath.replace(/\\/g, "/").trim();
 		return normalizedPath;
 	}
 	static normalizeLower(inputPath) {
@@ -60,6 +64,7 @@ class FolderLogics {
 		normalizedPath = normalizedPath.replace(/\\/g, "/");
 		return normalizedPath;
 	}
+
 }
 
 module.exports = FolderLogics;
