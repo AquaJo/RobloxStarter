@@ -15,7 +15,7 @@ Not even manual installing of plugins in Studio is required using aboves cmd.
 -   Rojo syncback from Uplift Games as Two-Way-Sync Option (Experimental!)
     -   Now even with an automatic save before option
 -   Variety of npm scripts (like `npm run save`)
--   Start-Script for an optional development process
+-   Start-Script as main development process - script
 -   Roblox-TS integration (also with Rojo Syncback with the help of rsync)
 -   dotenv, Prettier, Eslint formatting & linting & git, ... all the advantages of using an external IDE
 -   Workspace added
@@ -23,10 +23,7 @@ Not even manual installing of plugins in Studio is required using aboves cmd.
 
 ## Todo
 
--   Check uplift rojo mesh syncing
 -   Want to exit? (start terminal)
--   Fix rojoo-Plugin / find solution for start recognition
--   Reset option (closing roblox, reopening with existing build)
 -   Rsync on build only should remove changed files in out again! / or other solution
 -   Local option for tarmac
 -   proper handling of y/n when doing rsb in start-terminal
