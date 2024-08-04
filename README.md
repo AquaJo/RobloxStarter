@@ -1,4 +1,9 @@
-# Boilerplate for a Roblox-Studio Project configured for WSL2 ^^
+# Boilerplate for a Roblox-Studio Project configured for WSL2
+
+This project is aimed to make Roblox Studio - Visual Studio Code Integration as comfortable as possible in development and also setup, while providing support by default for cool tools that come with external IDE - programming in Roblox.\
+For that it accesses Windows from within WSL (e.g. on start) by itself to, for e.g., startup Roblox Studio with the build file.\
+Just follow the instructions below and do an `npm start`.\
+Not even manual installing of plugins in Studio is required using aboves cmd.
 
 ## Features
 
@@ -15,7 +20,6 @@
 -   dotenv, Prettier, Eslint formatting & linting & git, ... all the advantages of using an external IDE
 -   Workspace added
 -   Simple demonstration logic
--   Only english comments & more comments in general
 
 ## Todo
 
@@ -35,6 +39,7 @@
 -   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
 -   No sec listener for roblox shutdown on reset
 -   Universal accessible reset?
+-   Only english comments & more comments in general
 
 ## How to Setup?
 
@@ -47,6 +52,7 @@
     -   Install [eslint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
     -   Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
 -   Don't want to follow [start-script-practice](#want-to-develop)? --> feel free to `npm run updateSubmodules && npm run updatePlugin`
+    -   This diminishes much of the usecase of this project!
 
 ### Customization - dotenv
 
@@ -75,8 +81,9 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 -   Do you want to syncback changes you made to models etc. in Roblox Studio?
     -   Run `rojo syncback`
         -   <ins>Note:</ins> this does more than the usual rojo syncback cmd! (saving automatically and using rsync)
-    -   Be sure to do nothing while saving is in process and always check if it saved!
-        -   If saving isn't working feel free setting the timeout in the [according ps1](scripts/saveRSProcesses.ps1) higher.
+    -   Be sure to do nothing while saving is in process and always check if it really saved!
+        -   If saving isn't working feel free setting the timeout in the [according ps1](scripts/saveRSProcesses.ps1) higher
+        -   Or save by yourself and do an ["rssb"](#start---commands-development)
 -   Want to do a tarmac sync? - run `tarmac sync`
 -   Want to quit terminal while safely exiting whole development process (including Roblox Studio - Window, other opened windows, processes etc.?)
     -   Run `quit` or just do a `Ctrl+C` and follow the prompting for a save exit-run

@@ -39,6 +39,7 @@
 		"syncback",
 		"syncbacks",
 		"tsbuild",
-		"tswatch"
+		"tswatch",
+		"usecase"
 	]
 }
