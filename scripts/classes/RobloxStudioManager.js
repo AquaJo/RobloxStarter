@@ -89,7 +89,9 @@ class RobloxStudioManager {
 	async updateSubmodules() {
 		console.group(await ConsoleInterface.getColoredText("Updating submodules", this.groupParentColor));
 		try {
-			const spawn = spawnSync("npm", ["run", "updateSubmodules"], { encoding: "utf-8" });
+			const spawn = spawnSync("npm", ["run", "updateSubmodules"], {
+				encoding: "utf-8",
+			});
 			console.info(spawn.stdout);
 		} catch (error) {
 			console.error(error);
@@ -105,7 +107,9 @@ class RobloxStudioManager {
 			),
 		);
 		try {
-			const spawn = spawnSync("npm", ["run", "updatePlugin"], { encoding: "utf-8" });
+			const spawn = spawnSync("npm", ["run", "updatePlugin"], {
+				encoding: "utf-8",
+			});
 			console.info(spawn.stdout);
 		} catch (error) {
 			console.error(error);
@@ -207,6 +211,10 @@ class RobloxStudioManager {
 			let writePath = path.join(this.buildFolderLinuxConform, "tswatcher.log");
 			let writePathWin = path.join(this.buildFolder, "tswatcher.log");
 			// mkdirsync on fs.existsSync not needed in theory
+			// unlink file if existant first
+			if (fs.existsSync(writePath)) {
+				fs.unlinkSync(writePath);
+			}
 			console.log(`Writing TypeScript logs to: ${writePath}`);
 			const outputStream = fs.createWriteStream(writePath);
 			this.tscProcess = spawn("npm", ["run", "tswatch"], {
@@ -228,10 +236,12 @@ $process.Id
 $process = Start-Process powershell.exe -ArgumentList '-NoExit', '-Command', 'mode con: cols=${cols} lines=${lines}; Get-Content -Path \\"${writePathWin}\\" -Wait' -PassThru
 $process.Id
 `;
-
 			this.powershellLinux = spawn("powershell.exe", ["-Command", powershellCommand]);
+			this.powershellLinux.stdout.setEncoding("utf8");
 			this.windowPowershellPID = null;
 			this.powershellLinux.stdout.on("data", (data) => {
+				data = data.split("\n");
+				data = data.length > 1 ? data[data.length - 2].trim() : data[0];
 				if (!this.windowPowershellPID) {
 					this.windowPowershellPID = parseInt(data.toString().trim());
 					//console.log(`New PowerShell window process ID: ${this.windowPowershellPID}`);
@@ -269,7 +279,14 @@ $process.Id
 				this.groupParentColor,
 			),
 		);
-		const command = `"${this.robloxStudioPath}" "${this.buildPath}"`;
+		let command;
+		if (this.isWSL) {
+			// possibility for docker container, so just pipe it, doesn't matter that much
+			let pathWin = FolderLogics.wslMntToWindowsInCase(this.robloxStudioPath);
+			command = `cmd.exe /c "${pathWin}" "${this.buildPath}"`;
+		} else {
+			command = `"${this.robloxStudioPath}" "${this.buildPath}"`;
+		}
 
 		try {
 			exec(command, (error, stdout, stderr) => {

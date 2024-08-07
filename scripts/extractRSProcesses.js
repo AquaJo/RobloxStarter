@@ -14,8 +14,7 @@ function extract() {
 
 	try {
 		// Execute the PowerShell script synchronously
-		const stdout = execSync(command, { encoding: "utf-8" });
-
+		const stdout = execSync(command, { encoding: "utf-8" }).toString().trim(); // to make it an valid json to handle with in case of docker build
 		// Attempt to parse JSON from stdout and ensure it's an array of objects
 		try {
 			let processes = ensureObjArray(JSON.parse(stdout));
