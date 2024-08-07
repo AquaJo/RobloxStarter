@@ -9,7 +9,7 @@ const person = new Person("Alice", 30);
 person.greet(); // Ausgabe: Hello, my name is Alice and I am 30 years old.
 
 // Erstellen einer Instanz der Student-Klasse
-const student = new Student("Bob", 20, "S12345");
+const student = new Student("Bob", 21, "S12345");
 student.greet(); // Ausgabe: Hello, my name is Bob, I am 20 years old and my student ID is S12345.
 
 // Modifizieren und Abfragen der Eigenschaften
