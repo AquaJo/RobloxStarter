@@ -10,6 +10,7 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 
 -   "Linux first" - stack (rsync used in syncback & bash usage on plugin build not ported to windows yet, ...)
     -   Windows is kept in mind but isn't tested yet and guaranteed to be limited in functionality
+-   Optional [Docker-Build-Dev-Setup & Experience](#with-docker-on-windows-machine) for minimum setup requirements and conflict limiting
 -   Uses git-lfs by default for future-proofing (install before copy!)
 -   Includes tarmac for the same reason
 -   Rojo - file syncing from vsc to Roblox Studio
@@ -21,25 +22,6 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 -   dotenv, Prettier, Eslint formatting & linting & git, ... all the advantages of using an external IDE
 -   Workspace added
 -   Simple demonstration logic
-
-## Todo
-
--   Docker submodule optionally with build from here instead of newest main branch? ...
--   Want to exit? (start terminal)
--   Rsync on build only should remove changed files in out again! / or other solution
--   Local option for tarmac
--   proper handling of y/n when doing rsb in start-terminal
--   more commands, like `save`
--   Becoming Windows-friendly
--   Maybe docker build option as easy to set up build
-    -   In progress: see [dockers TODO](/docker/README.md#todo)
--   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
--   Specific kill option in case of kickout while in start?
--   Make npm start startup / close faster / more efficient
--   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
--   No sec listener for roblox shutdown on reset
--   Universal accessible reset?
--   Only english comments & more comments in general
 
 ## How to Setup?
 
@@ -58,7 +40,7 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 
 ### [With docker on Windows-Machine](https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter)
 
--   git clone this repository and do `npm run docker` or update the submodule and somehow run [`./docker/buildContainer.ps1`] or use the submodules repo only.
+-   git clone this repository and do `npm run docker` or update the submodule and somehow run [`./docker/buildContainer.ps1`] or use the [submodules repo](https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter) only.
 -   Then work inside the containers `/app`, e.g. with the help of the [Remote-Explorer for Containers in Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 -   Repeat **both** steps each time you start a new session :]
 
@@ -141,3 +123,21 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 | `npm run tms`                           | Runs `tms.js` (a tarmac sync)                                                                                              |
 | `npm run docker`                        | Downloads specific pointed docker submodule and executes docker-building with windows piper active                         |
 | `npm run dockerLatest`                  | Downloads specific pointed docker submodule, updates to remote and executes docker-building with windows piper active      |
+
+## Todo
+
+-   Workflows for docker and whatever
+-   Docker submodule optionally with build from here instead of newest main branch? ... (allowing easy own container clone on modified projects)
+-   Want to exit? (start terminal)
+-   Rsync on build only should remove changed files in out again! / or other solution
+-   Local option for tarmac
+-   proper handling of y/n when doing rsb in start-terminal
+-   more commands, like `save` in start-experience
+-   Becoming Windows-friendly
+-   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
+-   Specific kill option in case of kickout while in start?
+-   Make npm start startup / close faster / more efficient
+-   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
+-   No sec listener for roblox shutdown on reset
+-   Universal accessible reset?
+-   Only english comments & more comments in general
