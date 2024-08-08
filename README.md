@@ -3,12 +3,14 @@
 This project is aimed to make Roblox Studio - Visual Studio Code Integration as comfortable as possible in development and also setup, while providing support by default for cool tools that come with external IDE - programming in Roblox.\
 For that it accesses Windows from within WSL (e.g. on start) by itself to, for e.g., startup Roblox Studio with the build file.\
 Just follow the instructions below and do an `npm start`.\
-Not even manual installing of plugins in Studio is required using aboves cmd.
+Not even manual installing of plugins in Studio is required using aboves cmd.\
+**Use this project at your own "risk"!**
 
 ## Features
 
 -   "Linux first" - stack (rsync used in syncback & bash usage on plugin build not ported to windows yet, ...)
     -   Windows is kept in mind but isn't tested yet and guaranteed to be limited in functionality
+-   Optional [Docker-Build-Dev-Setup & Experience](#with-docker-on-windows-machine) for minimum setup requirements and conflict limiting
 -   Uses git-lfs by default for future-proofing (install before copy!)
 -   Includes tarmac for the same reason
 -   Rojo - file syncing from vsc to Roblox Studio
@@ -21,24 +23,9 @@ Not even manual installing of plugins in Studio is required using aboves cmd.
 -   Workspace added
 -   Simple demonstration logic
 
-## Todo
-
--   Want to exit? (start terminal)
--   Rsync on build only should remove changed files in out again! / or other solution
--   Local option for tarmac
--   proper handling of y/n when doing rsb in start-terminal
--   more commands, like `save`
--   Becoming Windows-friendly
--   Maybe docker build option as easy to set up build
--   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
--   Specific kill option in case of kickout while in start?
--   Make npm start startup / close faster / more efficient
--   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
--   No sec listener for roblox shutdown on reset
--   Universal accessible reset?
--   Only english comments & more comments in general
-
 ## How to Setup?
+
+### Without Docker
 
 -   Before doing a git clone
     -   Install git & [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
@@ -50,6 +37,12 @@ Not even manual installing of plugins in Studio is required using aboves cmd.
     -   Install [roblox-ts plugin](https://marketplace.visualstudio.com/items?itemName=Roblox-TS.vscode-roblox-ts)
 -   Don't want to follow [start-script-practice](#want-to-develop)? --> feel free to `npm run updateSubmodules && npm run updatePlugin`
     -   This diminishes much of the usecase of this project!
+
+### [With docker on Windows-Machine](https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter)
+
+-   git clone this repository and do `npm run docker` or update the submodule and somehow run [`./docker/buildContainer.ps1`] or use the [submodules repo](https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter) only.
+-   Then work inside the containers `/app`, e.g. with the help of the [Remote-Explorer for Containers in Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+-   Repeat **both** steps each time you start a new session :]
 
 ### Customization - dotenv
 
@@ -105,23 +98,46 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 
 ### NPM - Commands
 
-| Command                    | Description                                                                                                                |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `npm run updateSubmodules` | Installs submodules if needed and updates Rojoo submodule to latest on remote                                              |
-| `npm run updatePlugin`     | Builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
-| `npm run start`            | Starts developer - experience interface                                                                                    |
-| `npm run build`            | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
-| `npm run stop`             | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
-| `npm run stop -- hard`     | Does the same as as npm run stop, but closing it forcefully. Roblox will keep auto backups ig                              |
-| `npm run promptStop`       | Runs `promptStop.js` to make an prompted npm run stop with possible rojo syncback (including save and rsync)               |
-| `npm run tsbuild`          | Compiles TypeScript using `rbxtsc` available through `npm install`                                                         |
-| `npm run tswatch`          | Watches TypeScript files and compiles them on changes (to lua) into out                                                    |
-| `npm run rbuild`           | Runs `rbuild.js` to build the project (rojo build, but with .env configuration and copy to `./` etc)                       |
-| `npm run rserve`           | Starts the server using the `rserve.js` script (proxies normal `rojo serve` (maybe for future features))                   |
-| `npm run rssb`             | Runs `rsb.js`, doing a "simple, but else standard" `rojo sync back` without saving before nor rsync into `./src` folder    |
-| `npm run rsync`            | Synchronizes (`./out` to `/src`) files using `rsync` with specific include and exclude patterns (addressing roblox models) |
-| `npm run rsb`              | Runs `rssb` and `rsync` to synchronize files ("my rojo syncback (without save)")                                           |
-| `npm run save`             | Runs `save.js` to save the current state of Roblox-Studio progress **to build file**                                       |
-| `npm run saveRsb`          | Runs `save`, `rssb`, and `rsync` to save the state and synchronize files                                                   |
-| `npm run rkill`            | Terminates `rojo` processes and kills all processes on port 34872 (proxy)                                                  |
-| `npm run tms`              | Runs `tms.js` (a tarmac sync)                                                                                              |
+| Command                                 | Description                                                                                                                |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `npm run updateRojooSubmodules`         | Downloads specific pointed Rojo(o)-submodules if needed                                                                    |
+| `npm run updateRojooSubmodulesToLatest` | Downloads Rojo-submodules if needed and updates Rojoo submodule to latest on remote                                        |
+| `npm run updatePlugin`                  | Builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
+| `npm run start`                         | Starts developer - experience interface                                                                                    |
+| `npm run start -- noPluginLoading`      | Starts developer - experience interface without a new plugin-build                                                         |
+| `npm run start -- latest`               | Starts developer - experience interface while updating needed Rojo(o)-Submodules                                           |
+| `npm run build`                         | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
+| `npm run stop`                          | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
+| `npm run stop -- hard`                  | Does the same as as npm run stop, but closing it forcefully. Roblox will keep auto backups ig                              |
+| `npm run promptStop`                    | Runs `promptStop.js` to make an prompted npm run stop with possible rojo syncback (including save and rsync)               |
+| `npm run tsbuild`                       | Compiles TypeScript using `rbxtsc` available through `npm install`                                                         |
+| `npm run tswatch`                       | Watches TypeScript files and compiles them on changes (to lua) into out                                                    |
+| `npm run rbuild`                        | Runs `rbuild.js` to build the project (rojo build, but with .env configuration and copy to `./` etc)                       |
+| `npm run rserve`                        | Starts the server using the `rserve.js` script (proxies normal `rojo serve` (maybe for future features))                   |
+| `npm run rssb`                          | Runs `rsb.js`, doing a "simple, but else standard" `rojo sync back` without saving before nor rsync into `./src` folder    |
+| `npm run rsync`                         | Synchronizes (`./out` to `/src`) files using `rsync` with specific include and exclude patterns (addressing roblox models) |
+| `npm run rsb`                           | Runs `rssb` and `rsync` to synchronize files ("my rojo syncback (without save)")                                           |
+| `npm run save`                          | Runs `save.js` to save the current state of Roblox-Studio progress **to build file**                                       |
+| `npm run saveRsb`                       | Runs `save`, `rssb`, and `rsync` to save the state and synchronize files                                                   |
+| `npm run rkill`                         | Terminates `rojo` processes and kills all processes on port 34872 (proxy)                                                  |
+| `npm run tms`                           | Runs `tms.js` (a tarmac sync)                                                                                              |
+| `npm run docker`                        | Downloads specific pointed docker submodule and executes docker-building with windows piper active                         |
+| `npm run dockerLatest`                  | Downloads specific pointed docker submodule, updates to remote and executes docker-building with windows piper active      |
+
+## Todo
+
+-   Workflows for docker and whatever
+-   Docker submodule optionally with build from here instead of newest main branch? ... (allowing easy own container clone on modified projects)
+-   Want to exit? (start terminal)
+-   Rsync on build only should remove changed files in out again! / or other solution
+-   Local option for tarmac
+-   proper handling of y/n when doing rsb in start-terminal
+-   more commands, like `save` in start-experience
+-   Becoming Windows-friendly
+-   Maybe framework integration like [flamework](https://devforum.roblox.com/t/roblox-ts-tutorial-roblox-ts-and-flamework-introduction/1937537)
+-   Specific kill option in case of kickout while in start?
+-   Make npm start startup / close faster / more efficient
+-   Maybe create a github workflow automatically building and releasing rbxm - plugins .... (but not just using it here then --> open source building is fun right?)
+-   No sec listener for roblox shutdown on reset
+-   Universal accessible reset?
+-   Only english comments & more comments in general

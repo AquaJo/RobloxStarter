@@ -69,7 +69,7 @@ class RobloxStudioManager {
 	async initialize() {
 		console.group(await ConsoleInterface.getColoredText("Setting up development environment", "green"));
 		if (!this.args.includes("noPluginLoading")) {
-			await this.updateSubmodules();
+			await this.updateSubmodules(this.args.includes("latest"));
 			await this.updatePlugin();
 		}
 		await this.build();
@@ -86,12 +86,24 @@ class RobloxStudioManager {
 		console.groupEnd();
 	}
 
-	async updateSubmodules() {
-		console.group(await ConsoleInterface.getColoredText("Updating submodules", this.groupParentColor));
+	async updateSubmodules(latest) {
+		console.group(
+			await ConsoleInterface.getColoredText(
+				"Updating Rojo(o) submodules" + (latest ? " to latest" : ""),
+				this.groupParentColor,
+			),
+		);
 		try {
-			const spawn = spawnSync("npm", ["run", "updateSubmodules"], {
-				encoding: "utf-8",
-			});
+			let spawn;
+			if (latest) {
+				spawn = spawnSync("npm", ["run", "updateRojooSubmodulesToLatest"], {
+					encoding: "utf-8",
+				});
+			} else {
+				spawn = spawnSync("npm", ["run", "updateRojooSubmodules"], {
+					encoding: "utf-8",
+				});
+			}
 			console.info(spawn.stdout);
 		} catch (error) {
 			console.error(error);
