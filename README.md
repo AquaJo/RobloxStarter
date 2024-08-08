@@ -24,11 +24,7 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 
 ## Todo
 
--   Submodule pointer to version or mentioning or implementation of `noPluginLoading` arg constructor (but even then one-time load required ...)
 -   Docker submodule optionally with build from here instead of newest main branch? ...
--   Prettier format all at a time before push!
--   Docker command include in the npm command list, with reference to setup maybe
--   Docker Submodule
 -   Want to exit? (start terminal)
 -   Rsync on build only should remove changed files in out again! / or other solution
 -   Local option for tarmac
