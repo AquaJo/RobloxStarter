@@ -1,3 +1,6 @@
 [submodule "Rojoo"]
 	path = Rojoo
 	url = https://github.com/AquaJo/Rojoo
+[submodule "docker"]
+	path = docker
+	url = https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter

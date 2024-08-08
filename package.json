@@ -3,7 +3,10 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"updateSubmodules": "git submodule update --init --recursive && git submodule update --remote --force",
+		"docker": "git submodule update --init --recursive docker && powershell.exe ./docker/buildContainer.ps1",
+		"dockerLatest": "git submodule update --init --recursive --remote --force docker && powershell.exe ./docker/buildContainer.ps1",
+		"updateRojooSubmodules": "git submodule update --init --recursive Rojoo",
+		"updateRojooSubmodulesToLatest": "git submodule update --init --recursive --remote --force Rojoo",
 		"updatePlugin": "bash ./Rojoo/plugin/buildInsideMain.sh",
 		"start": "node ./scripts/start.js",
 		"build": "npm run tsbuild && npm run rbuild",
