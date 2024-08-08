@@ -27,6 +27,8 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 
 ### Without Docker
 
+-   If you previously have set up a docker container for RobloxStarter, be sure to stop it first.\
+    Also be sure to stop all processes on http://localhost:34872/ & http://localhost:34873/ in general
 -   Before doing a git clone
     -   Install git & [git-lfs](https://github.com/git-lfs/git-lfs/wiki/Installation)
     -   Install [node & install dependencies](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with `npm i`
@@ -65,7 +67,7 @@ Do an `npm run build`, which compiles ts, then compiles to rbxlx-build
 
 ### Want to develop?
 
--   After following .env recommendations and above run `npm start`
+-   After following [.env recommendations](#customization---dotenv) and above run `npm start`
     -   Running that should result in opening Roblox Studio with the build file while watching vs-code changes and opening a powershell that prints you roblox-ts-watch-logs
 -   Also a terminal interface in the main process should appear, which you can interact with (only custom [cmds](#start---commands-development))
 -   Do you want to syncback changes you made to models etc. in Roblox Studio?
