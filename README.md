@@ -122,10 +122,12 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 
 | Command                                 | Description                                                                                                                |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `npm run updateRojooSubmodules`         | Downloads specific pointed Rojo-submodules if needed                                                                       |
+| `npm run updateRojooSubmodules`         | Downloads specific pointed Rojo(o)-submodules if needed                                                                    |
 | `npm run updateRojooSubmodulesToLatest` | Downloads Rojo-submodules if needed and updates Rojoo submodule to latest on remote                                        |
 | `npm run updatePlugin`                  | Builds [Rojoo-plugin from git submodule](https://github.com/AquaJo/Rojoo)                                                  |
 | `npm run start`                         | Starts developer - experience interface                                                                                    |
+| `npm run start -- noPluginLoading`      | Starts developer - experience interface without a new plugin-build                                                         |
+| `npm run start -- latest`               | Starts developer - experience interface while updating needed Rojo(o)-Submodules                                           |
 | `npm run build`                         | Runs `tsbuild` and `rbuild` (rojo-building) to build the project rbxlx - file                                              |
 | `npm run stop`                          | Stops the Roblox Studio Build-Window using the `stop.js` script without **force**-kill roblox window                       |
 | `npm run stop -- hard`                  | Does the same as as npm run stop, but closing it forcefully. Roblox will keep auto backups ig                              |
