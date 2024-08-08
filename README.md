@@ -56,9 +56,9 @@ Not even manual installing of plugins in Studio is required using aboves cmd.\
 -   Don't want to follow [start-script-practice](#want-to-develop)? --> feel free to `npm run updateSubmodules && npm run updatePlugin`
     -   This diminishes much of the usecase of this project!
 
-### [With docker on Windows-Machine](./docker/README.md)
+### [With docker on Windows-Machine](https://github.com/AquaJo/Windows-Docker-Pipe-for-RobloxStarter)
 
--   git clone this repository and do `npm run docker` or just run [`./docker/buildContainer.ps1`](./docker/buildContainer.ps1) somehow
+-   git clone this repository and do `npm run docker` or update the submodule and somehow run [`./docker/buildContainer.ps1`] or use the submodules repo only.
 -   Then work inside the containers `/app`, e.g. with the help of the [Remote-Explorer for Containers in Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 -   Repeat **both** steps each time you start a new session :]
 
