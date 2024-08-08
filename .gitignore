@@ -6,6 +6,7 @@
 *.tsbuildinfo
 
 # roblox specific stuff
+/plugin/Rojoo.rbxm
 build.rbxlx
 build_noEdit.rbxlx
 build_noEditWsl.rbxlx
