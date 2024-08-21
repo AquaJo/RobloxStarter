@@ -161,8 +161,16 @@ class RobloxStudioManager {
 		this.pluginsFolder = `${this.robloxFolder}/Plugins`;
 		this.rojoPluginPath = `${this.pluginsFolder}/Rojoo.rbxm`;
 		console.info("Found plugins folder: " + this.pluginsFolder);
-		this.versionsFolder = FolderLogics.findNewestModifiedFolder(`${this.robloxFolder}/Versions`);
-		console.info("Found most recent Roblox versions folder: " + this.versionsFolder);
+		this.versionsFolder = FolderLogics.findFirstFolderWithFile(
+			`${this.robloxFolder}/Versions`,
+			"RobloxStudioBeta.exe",
+		);
+
+		if (!this.versionsFolder) {
+			await this.beforeDoneError();
+			return;
+		}
+		console.info("Found Roblox versions folder containing RobloxStudioBeta.exe: " + this.versionsFolder);
 		this.robloxStudioPath = `${this.versionsFolder}/RobloxStudioBeta.exe`;
 		console.groupEnd();
 	}
@@ -304,12 +312,16 @@ $process.Id
 			exec(command, (error, stdout, stderr) => {
 				if (!this.ending && !this.resetting) {
 					if (error) {
-						console.error(`Error on opening Roblox Studio with build: ${error.message}`);
-						this.beforeDoneError(); // could even happen haver done, but should cancle out nevertheless :D
+						console.error(
+							`Error on opening Roblox Studio with build, maybe retry if Roblox Studio is updating: ${error.message}`,
+						);
+						this.beforeDoneError();
 						return;
 					}
 					if (stderr) {
-						console.error(`Error on opening Roblox Studio with build: ${stderr}`);
+						console.error(
+							`Error on opening Roblox Studio with build, maybe retry if Roblox Studio is updating: ${stderr}`,
+						);
 						this.beforeDoneError();
 						return;
 					}

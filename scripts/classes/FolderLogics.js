@@ -33,6 +33,34 @@ class FolderLogics {
 			return null;
 		}
 	}
+	static findFirstFolderWithFile(dirPath, fileName) {
+		try {
+			// Read the directory
+			const files = fs.readdirSync(dirPath);
+
+			// Filter the files
+			const directories = files.filter((file) => {
+				const fullPath = path.join(dirPath, file);
+				return fs.statSync(fullPath).isDirectory();
+			});
+
+			if (directories.length === 0) {
+				throw new Error("No directories found.");
+			} else {
+				for (const folderName of directories) {
+					const fullPath = path.join(dirPath, folderName);
+					if (fs.existsSync(path.join(fullPath, fileName))) {
+						return fullPath;
+					}
+				}
+
+				return null;
+			}
+		} catch (error) {
+			console.error("Error:", error.message);
+			return null;
+		}
+	}
 	/**
 	 * turn WSL-Path into windows-path
 	 * @param {string} wslPath - WSL-Path (/mnt/) (in case)
@@ -64,7 +92,6 @@ class FolderLogics {
 		normalizedPath = normalizedPath.replace(/\\/g, "/");
 		return normalizedPath;
 	}
-
 }
 
 module.exports = FolderLogics;
