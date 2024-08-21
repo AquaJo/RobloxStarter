@@ -125,6 +125,7 @@ Commands without options or messages can also be run as e.g. `quit()` instead of
 | `npm run tms`                           | Runs `tms.js` (a tarmac sync)                                                                                              |
 | `npm run docker`                        | Downloads specific pointed docker submodule and executes docker-building with windows piper active                         |
 | `npm run dockerLatest`                  | Downloads specific pointed docker submodule, updates to remote and executes docker-building with windows piper active      |
+| `npm run updateDocker`                  | Just updates docker submodule to latest commit on main branch without starting build process                               |
 
 ## Todo
 
