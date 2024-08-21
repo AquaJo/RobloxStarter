@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
+		"updateDocker": "git submodule update --init --recursive docker && git submodule update --remote --force docker",
 		"docker": "git submodule update --init --recursive docker && powershell.exe ./docker/buildContainer.ps1",
 		"dockerLatest": "git submodule update --init --recursive docker && git submodule update --remote --force docker && powershell.exe ./docker/buildContainer.ps1",
 		"updateRojooSubmodules": "git submodule update --init --recursive Rojoo",
