@@ -3,7 +3,7 @@
 This project is aimed to make Roblox Studio - Visual Studio Code Integration as comfortable as possible in development and also setup, while providing support by default for cool tools that come with external IDE - programming in Roblox.\
 For that it accesses Windows from within WSL (e.g. on start) by itself to, for e.g., startup Roblox Studio with the build file.\
 Just follow the instructions below and do an `npm start`.\
-Not even manual installing of plugins in Studio is required using aboves cmd.\
+Not even manual installing of plugins in Roblox Studio is required using aboves cmd.\
 **Use this project at your own "risk"!**
 
 ## Features
