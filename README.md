@@ -1,3 +1,7 @@
+## Disclaimer
+This project is currently on ice — think of it as a creative brainstorm in optimizing developer experience rather than a finished boilerplate project.\
+If I dive back into Roblox development, I might revamp it in some ways.
+
 # Boilerplate for a Roblox-Studio Project configured for WSL2
 
 This project is aimed to make Roblox Studio - Visual Studio Code Integration as comfortable as possible in development and also setup, while providing support by default for cool tools that come with external IDE - programming in Roblox.\
